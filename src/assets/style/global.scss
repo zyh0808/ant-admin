@@ -1,0 +1,20 @@
+$red: red;
+$white: white;
+$blue:#409EFF;
+$smallSze: 12px;
+$middleSize: 14px;
+$largeSize: 16px;
+
+.middle-btn {
+    height: 40px;
+    width: 100%;
+    background-color: $blue;
+    border-radius: 5px;
+    font-size: $middleSize;
+    color:$white;
+    font-weight: bold;
+}
+
+.full-screen {
+    height: 100%;
+}

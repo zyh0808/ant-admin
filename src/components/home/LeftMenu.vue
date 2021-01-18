@@ -1,0 +1,43 @@
+<template>
+  <a-menu mode="inline" theme="dark" :inline-collapsed="collapsed" @click="menuClicked">
+    <template v-for="(item, index) in menu">
+      <a-sub-menu :key="item.key" v-if="item.hasChild">
+        <span slot="title">
+          <a-icon :type="item.icon" /><span>{{item.name}}</span>
+        </span>
+        <a-menu-item v-for="(it, i) in item.children" :key="it.key">{{it.name}}
+        </a-menu-item>
+      </a-sub-menu>
+      <a-menu-item :key="item.key" v-else>
+        <a-icon :type="item.icon" />
+        <span>{{item.name}}</span>
+      </a-menu-item>
+    </template>
+  </a-menu>
+</template>
+<script>
+import { myMenu } from "@/js/menu.js"
+import { mapActions } from 'vuex'
+export default {
+  data () {
+    return {
+      menu: myMenu,
+      collapsed: false
+    }
+  },
+  methods: {
+    ...mapActions({
+      clickMenuItem: 'menu/clickMenuItem'
+    }),
+    menuClicked (item) {
+      this.clickMenuItem(item.key)
+      this.$router.push({ name: item.key })
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.el-menu {
+  border-right: none;
+}
+</style>
