@@ -1,3 +1,5 @@
+import { login } from '@/api/user.js'
+import { Message } from 'ant-design-vue'
 const initialState = {
     token: ''
 }
@@ -24,14 +26,12 @@ const mutations = {
 const actions = {
     login({ commit }, userInfo) {
         const { username, password } = userInfo
-        return new Promise((resolve, reject) => {
-            login({ username: username.trim(), password: password }).then(response => {
-                const { data } = response
-                commit('setToken', data.token)
-                resolve()
-            }).catch(error => {
-                reject(error)
-            })
+        login({ username: username.trim(), password: password }).then(response => {
+            console.log(response)
+            // const { data } = response
+            // commit('setToken', data.token)
+        }).catch(error => {
+            Message.error(error.msg)
         })
     }
 }
