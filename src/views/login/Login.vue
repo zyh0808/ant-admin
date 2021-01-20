@@ -2,47 +2,26 @@
   <div id="login" class="login-main">
     <a-tabs default-active-key="1" class="login-tabs">
       <a-tab-pane key="1" tab="登录">
-        <a-form
-          :form="form"
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 19 }"
-          @submit="handleSubmit"
-          labelAlign="left"
-          class="login-tab"
-        >
+        <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }" @submit="handleSubmit"
+          labelAlign="left" class="login-tab">
           <a-form-item label="用户名">
-            <a-input
-              v-decorator="[
+            <a-input v-decorator="[
                 'username',
                 {
                   rules: [{ required: true, message: '请输入用户名!' }],
                 },
-              ]"
-              placeholder="用户名"
-            >
-              <a-icon
-                slot="prefix"
-                type="user"
-                style="color: rgba(0, 0, 0, 0.25)"
-              />
+              ]" placeholder="用户名">
+              <a-icon slot="prefix" type="user" style="color: rgba(0, 0, 0, 0.25)" />
             </a-input>
           </a-form-item>
           <a-form-item label="密码">
-            <a-input
-              v-decorator="[
+            <a-input v-decorator="[
                 'password',
                 {
                   rules: [{ required: true, message: '请输入密码!' }],
                 },
-              ]"
-              type="password"
-              placeholder="密码"
-            >
-              <a-icon
-                slot="prefix"
-                type="lock"
-                style="color: rgba(0, 0, 0, 0.25)"
-              />
+              ]" type="password" placeholder="密码">
+              <a-icon slot="prefix" type="lock" style="color: rgba(0, 0, 0, 0.25)" />
             </a-input>
           </a-form-item>
           <!-- <a-form-item :wrapper-col="{ span: 12, offset: 5 }"> </a-form-item> -->
@@ -58,17 +37,17 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
-function hasErrors(fieldsError) {
+function hasErrors (fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 export default {
-  data() {
+  data () {
     return {
       hasErrors,
       form: this.$form.createForm(this, { name: 'horizontal_login' })
     }
   },
-  mounted() {
+  mounted () {
     // this.$nextTick(() => {
     //   // To disabled submit button at the beginning.
     //   this.form.validateFields();
@@ -79,16 +58,16 @@ export default {
       login: 'user/login'
     }),
     // Only show error after a field is touched.
-    userNameError() {
+    userNameError () {
       const { getFieldError, isFieldTouched } = this.form;
       return isFieldTouched('username') && getFieldError('username');
     },
     // Only show error after a field is touched.
-    passwordError() {
+    passwordError () {
       const { getFieldError, isFieldTouched } = this.form;
       return isFieldTouched('password') && getFieldError('password');
     },
-    handleSubmit(e) {
+    handleSubmit (e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
