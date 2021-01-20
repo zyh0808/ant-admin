@@ -15,7 +15,7 @@ module.exports = {
       }
   },
   devServer: {
-    host: 'http://192.168.200.61',
+    // host: 'http://192.168.200.61',
     port: 8088,
     inline: true,
     proxy : {
