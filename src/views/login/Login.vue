@@ -45,8 +45,6 @@
               />
             </a-input>
           </a-form-item>
-          <!-- <a-form-item :wrapper-col="{ span: 12, offset: 5 }"> </a-form-item> -->
-
           <a-button type="primary" html-type="submit" class="login-btn">
             登录
           </a-button>
