@@ -1,9 +1,9 @@
-import { myMenu } from  "@/js/menu.js"
+import { myMenu } from "@/js/menu.js"
 const initialState = {
     tabs: [
-        { key: "index", title: '首页', closable: false }
+        { key: "home", title: '首页', closable: false }
     ],
-    activeName: 'index'
+    activeName: 'home'
 }
 
 const state = () => ({
@@ -22,27 +22,27 @@ const getters = {
 
 // mutations
 const mutations = {
-    addTab(state, tab) {
+    addTab (state, tab) {
         state.tabs.push(tab)
     },
-    switchTab(state, index) {
+    switchTab (state, index) {
         state.activeName = index
     },
-    changeTabs(state, tabs) {
+    changeTabs (state, tabs) {
         state.tabs = tabs
     }
 }
 
 // actions
 const actions = {
-    clickMenuItem({ commit, state }, index) {
+    clickMenuItem ({ commit, state }, index) {
         const tab = state.tabs.find(item => item.key === index)
-        if(tab) {
+        if (tab) {
             commit("switchTab", tab.key)
             return
-        }else {
+        } else {
             let menu = myMenu.find(it => it.key === index)
-            if(!menu) {
+            if (!menu) {
                 menu = myMenu.map(a => a.children).flat().find(it => it.key === index)
             }
             const newTab = {

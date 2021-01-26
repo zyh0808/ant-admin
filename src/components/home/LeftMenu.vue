@@ -1,11 +1,12 @@
 <template>
-  <a-menu mode="inline" theme="dark" :inline-collapsed="collapsed" @click="menuClicked">
-    <template v-for="(item, index) in menu">
+  <a-menu mode="inline" theme="dark" :inline-collapsed="collapsed"
+    @click="menuClicked">
+    <template v-for="(item) in menu">
       <a-sub-menu :key="item.key" v-if="item.hasChild">
         <span slot="title">
           <a-icon :type="item.icon" /><span>{{item.name}}</span>
         </span>
-        <a-menu-item v-for="(it, i) in item.children" :key="it.key">{{it.name}}
+        <a-menu-item v-for="(it) in item.children" :key="it.key">{{it.name}}
         </a-menu-item>
       </a-sub-menu>
       <a-menu-item :key="item.key" v-else>
