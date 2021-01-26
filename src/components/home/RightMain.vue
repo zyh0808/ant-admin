@@ -1,10 +1,17 @@
 <template>
   <div id="rightMain">
-    <a-tabs v-model="activeName" type="editable-card" @tabClick="tabClick" @edit="editTab">
-      <a-tab-pane v-for="item in tabs" :key="item.key" :tab="item.title" :closable="item.closable">
+    <a-tabs v-model="activeName" type="editable-card" @tabClick="tabClick"
+      @edit="editTab">
+      <a-tab-pane v-for="item in tabs" :key="item.key" :tab="item.title"
+        :closable="item.closable">
       </a-tab-pane>
     </a-tabs>
-    <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive">
+      </router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive">
+    </router-view>
   </div>
 </template>
 <script>
