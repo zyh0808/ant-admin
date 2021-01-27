@@ -1,7 +1,7 @@
 <template>
   <a-layout style="height: 100%">
-    <a-layout-header class="header-text">Header
-    </a-layout-header>
+    <!-- <a-layout-header class="header-text">Header
+    </a-layout-header> -->
     <a-layout class="home-main">
       <a-layout-sider>
         <left-menu></left-menu>

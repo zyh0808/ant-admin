@@ -4,7 +4,7 @@ import index from "../views/index.vue"
 
 const routes = [
   {
-    path: "/Home",
+    path: "/home",
     component: index,
     children: [
       {
