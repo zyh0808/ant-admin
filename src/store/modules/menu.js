@@ -1,7 +1,7 @@
 import { myMenu } from "@/js/menu.js"
 const initialState = {
     tabs: [
-        { key: "home", title: '首页', closable: false }
+        { key: "home", title: '首页', icon: 'windows', closable: false }
     ],
     activeName: 'home'
 }
@@ -48,7 +48,8 @@ const actions = {
             const newTab = {
                 key: menu.key,
                 title: menu.name,
-                closable: true
+                closable: true,
+                icon: 'apple'
             }
             commit("addTab", newTab)
             commit("switchTab", menu.key)

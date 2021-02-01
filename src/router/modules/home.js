@@ -1,11 +1,10 @@
-// import homeIndex from "../views/home/index.vue"
-import home from "../views/home/home.vue"
-import index from "../views/index.vue"
+import main from "../../views/main.vue"
+import home from "../../views/home.vue"
 
 const routes = [
   {
-    path: "/home",
-    component: index,
+    path: "/main",
+    component: main,
     children: [
       {
         path: '',

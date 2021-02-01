@@ -1,27 +1,21 @@
 <template>
-  <div>
-    <a-button type="primary" style="margin-bottom: 16px"
-      @click="toggleCollapsed">
-      <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-    </a-button>
-    <a-menu :default-selected-keys="['home']" :default-open-keys="['list']"
-      mode="inline" theme="dark" :inline-collapsed="collapsed"
-      @click="menuClicked">
-      <template v-for="(item) in menu">
-        <a-sub-menu :key="item.key" v-if="item.hasChild">
-          <span slot="title">
-            <a-icon :type="item.icon" /><span>{{item.name}}</span>
-          </span>
-          <a-menu-item v-for="(it) in item.children" :key="it.key">{{it.name}}
-          </a-menu-item>
-        </a-sub-menu>
-        <a-menu-item :key="item.key" v-else>
-          <a-icon :type="item.icon" />
-          <span>{{item.name}}</span>
+  <a-menu :default-selected-keys="['home']" :default-open-keys="['list']"
+    mode="inline" theme="dark" :inline-collapsed="collapsed"
+    @click="menuClicked">
+    <template v-for="(item) in menu">
+      <a-sub-menu :key="item.key" v-if="item.hasChild">
+        <span slot="title">
+          <a-icon :type="item.icon" /><span>{{item.name}}</span>
+        </span>
+        <a-menu-item v-for="(it) in item.children" :key="it.key">{{it.name}}
         </a-menu-item>
-      </template>
-    </a-menu>
-  </div>
+      </a-sub-menu>
+      <a-menu-item :key="item.key" v-else>
+        <a-icon :type="item.icon" />
+        <span>{{item.name}}</span>
+      </a-menu-item>
+    </template>
+  </a-menu>
 </template>
 <script>
 import { myMenu } from "@/js/menu.js"

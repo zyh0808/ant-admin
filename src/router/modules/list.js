@@ -1,13 +1,12 @@
-// import ListIndex from "../views/list/index.vue"
-import ListOne from "../views/list/ListOne.vue"
-import ListTwo from "../views/list/ListTwo.vue"
-import index from "../views/index.vue"
+import ListOne from "../../views/list/ListOne.vue"
+import ListTwo from "../../views/list/ListTwo.vue"
+import main from "../../views/main.vue"
 
 const routes = [
   {
     path: "/list",
     name: "list",
-    component: index,
+    component: main,
     children: [
       {
         path: "listOne",

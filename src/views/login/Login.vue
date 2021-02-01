@@ -116,12 +116,6 @@ export default {
       form: this.$form.createForm(this, { name: 'horizontal_login' })
     }
   },
-  mounted () {
-    // this.$nextTick(() => {
-    //   // To disabled submit button at the beginning.
-    //   this.form.validateFields();
-    // });
-  },
   methods: {
     ...mapActions({
       login: 'user/login',
@@ -151,7 +145,7 @@ export default {
         if (!err) {
           // console.log('Received values of form: ', values);
           this.login(values)
-          this.$router.push({ name: "home" })
+          this.$router.push({ name: "main" })
         }
       });
     },

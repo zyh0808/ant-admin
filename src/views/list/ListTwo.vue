@@ -5,10 +5,10 @@
 <script>
 export default {
   created () {
-    console.log('created 2')
+    // console.log('created 2')
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="index">这是首页</div>
+  <div id="home">这是首页</div>
 </template>
 
 <script>
@@ -8,5 +8,5 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

@@ -1,22 +1,20 @@
 <template>
   <div id="rightMain">
-    <div class="person-info">
-      <a-row type="flex" justify="end" style="height: 50px">
-        <p>您好，<span class="user-name" @click="logout">张三三</span>
-        </p>
-      </a-row>
-    </div>
     <a-tabs v-model="activeName" hide-add type="editable-card"
       @tabClick="tabClick" @edit="editTab">
-      <a-tab-pane v-for="item in tabs" :key="item.key" :tab="item.title"
+      <a-tab-pane v-for="item in tabs" :key="item.key"
         :closable="item.closable">
+        <span slot="tab">
+          <a-icon :type="item.icon" />
+          {{item.title}}
+        </span>
       </a-tab-pane>
     </a-tabs>
     <keep-alive>
-      <router-view v-if="$route.meta.keepAlive">
+      <router-view class="routerIndex" v-if="$route.meta.keepAlive">
       </router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive">
+    <router-view class="routerIndex" v-if="!$route.meta.keepAlive">
     </router-view>
   </div>
 </template>
@@ -67,28 +65,17 @@ export default {
       this.changeTabs(panes)
       this.switchTab(activeKey)
       this.$router.replace({ name: activeKey })
-    },
-    logout () {
-      let that = this
-      this.$confirm({
-        title: '注销',
-        content: '您确定要退出登录吗？',
-        onOk () {
-          that.$router.replace({ name: 'login' })
-        },
-        onCancel () { }
-      })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.person-info {
-  height: 50px;
-  line-height: 50px;
-  margin: 0 30px;
-  .user-name {
-    color: #1890ff;
+#rightMain {
+  padding: 5px;
+  .routerIndex {
+    min-height: 360px;
+    background-color: #fff;
+    margin: 5px;
   }
 }
 </style>
