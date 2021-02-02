@@ -26,7 +26,7 @@ const mutations = {
 const actions = {
     login ({ commit }, loginInfo) {
         const { username, password } = loginInfo
-        login({ username: username.trim(), password: password }).then(response => {
+        login({ username: username, password: password }).then(response => {
             console.log(response)
             // const { data } = response
             // commit('setToken', data.token)
@@ -37,7 +37,7 @@ const actions = {
     register ({ commit }, registerInfo) {
         const { username, password, passwordConfirm, email, phone, question = '问题', answer = '答案' } = registerInfo
         register({
-            username: username.trim(),
+            username: username,
             password: password,
             passwordConfirm: passwordConfirm,
             email: email,

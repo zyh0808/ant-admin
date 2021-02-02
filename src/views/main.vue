@@ -36,6 +36,9 @@ export default {
     LeftMenu,
     RightMain
   },
+  // created () {
+  //   console.log(this.$router)
+  // },
   methods: {
     logout () {
       let that = this

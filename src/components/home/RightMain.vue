@@ -73,8 +73,7 @@ export default {
 #rightMain {
   padding: 5px;
   .routerIndex {
-    min-height: 360px;
-    background-color: #fff;
+    // min-height: 360px;
     margin: 5px;
   }
 }

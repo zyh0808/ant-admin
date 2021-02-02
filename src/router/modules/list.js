@@ -1,5 +1,5 @@
-import ListOne from "../../views/list/ListOne.vue"
-import ListTwo from "../../views/list/ListTwo.vue"
+import listOne from "../../views/list/listOne.vue"
+import listTwo from "../../views/list/listTwo.vue"
 import main from "../../views/main.vue"
 
 const routes = [
@@ -11,12 +11,12 @@ const routes = [
       {
         path: "listOne",
         name: "listOne",
-        component: ListOne
+        component: listOne
       },
       {
         path: "listTwo",
         name: "listTwo",
-        component: ListTwo
+        component: listTwo
       }
     ]
   },
