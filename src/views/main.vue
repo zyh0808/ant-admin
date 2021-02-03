@@ -36,15 +36,15 @@ export default {
     LeftMenu,
     RightMain
   },
-  // created () {
-  //   console.log(this.$router)
-  // },
   methods: {
     logout () {
       let that = this
       this.$confirm({
         title: '注销',
         content: '您确定要退出登录吗？',
+        okText: '确定',
+        cancelText: '取消',
+        okType: 'danger',
         onOk () {
           that.$router.replace({ name: 'login' })
         },

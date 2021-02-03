@@ -22,6 +22,10 @@ module.exports = {
       '/user': {
         target: process.env.VUE_APP_URL,
         changeOrigin: true
+      },
+      '/UpLoadFiles': {
+        target: process.env.VUE_APP_URL,
+        changeOrigin: true
       }
     }
   },

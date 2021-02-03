@@ -430,7 +430,9 @@ export default {
     touch-action: none;
   }
 }
+</style>
 
+<style lang="scss" scoped>
 .editable-row-operations a {
   margin-right: 8px;
 }

@@ -6,6 +6,7 @@ import main from './modules/main.js'
 import list from './modules/list.js'
 import chart from './modules/chart.js'
 import home from './modules/home.js'
+import upload from './modules/upload.js'
 
 
 Vue.use(VueRouter);
@@ -15,7 +16,8 @@ const routes = [
   ...home,
   ...main,
   ...list,
-  ...chart
+  ...chart,
+  ...upload
 ];
 
 const router = new VueRouter({

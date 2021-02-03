@@ -11,5 +11,8 @@ export const myMenu = [
             { key: "chartOne", name: '图表一' },
             { key: "chartTwo", name: '图表二' }
         ]
+    },
+    {
+        key: "uploadImage", name: '上传图片', icon: 'file-image', hasChild: false
     }
 ]

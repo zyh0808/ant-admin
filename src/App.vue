@@ -3,6 +3,15 @@
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  created () {
+    if (this.$route.name !== 'login' && this.$route.name !== 'home') {
+      this.$router.replace({ name: 'home' })
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 * {
