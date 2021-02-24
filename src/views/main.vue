@@ -1,22 +1,24 @@
 <template>
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
     <a-layout-sider v-model="collapsed" collapsible>
-      <div class="logo" />
+      <div class="logo" src="../assets/logo.png" />
       <left-menu></left-menu>
     </a-layout-sider>
     <a-layout class="home-main">
-      <a-layout-header :style="{background: 'rgb(190, 200, 200)'}">
-        <div class="person-info">
-          <a-row type="flex" align="middle" class="row-common">
-            <p><span class="user-name" @click="logout">张三三</span>，您好！
-            </p>
-            <a-button type="link" href="http://localhost:8080/" target="_blank"
-              ghost>
-              大屏
-            </a-button>
-          </a-row>
-        </div>
-      </a-layout-header>
+      <!-- <a-layout-header class="headerBox"
+        :style="{background: '#fff', height: '40px', lineHeight: '40px'}">
+        <a-dropdown class="avaterName">
+          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+            <a-avatar style="backgroundColor:#87d068" icon="user" />
+            zzz
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <a href="javascript:;">退出登录</a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </a-layout-header> -->
       <a-layout-content>
         <right-main></right-main>
       </a-layout-content>
@@ -60,25 +62,11 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-.header-text {
-  text-align: center;
-  border-bottom: solid 2px #ffffff;
-  font-size: 16px;
-  line-height: 60px;
-  color: $white;
+.ant-layout-header {
+  padding: 0 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
 .home-main {
   height: 100%;
-}
-
-p {
-  margin: 0;
-}
-.person-info {
-  .user-name {
-    color: #1890ff;
-    font-size: 13px;
-    cursor: pointer;
-  }
 }
 </style>

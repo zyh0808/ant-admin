@@ -2,8 +2,8 @@ export const myMenu = [
     { key: "home", name: '首页', icon: 'windows', hasChild: false, children: [] },
     {
         key: "list", name: '列表', icon: 'wechat', hasChild: true, children: [
-            { key: "listOne", name: '列表一' },
-            { key: "listTwo", name: '列表二' }
+            { key: "in", name: '药品入库' },
+            { key: "out", name: '药品出库' }
         ]
     },
     {

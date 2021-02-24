@@ -9,13 +9,13 @@ const routes = [
     component: main,
     children: [
       {
-        path: "listOne",
-        name: "listOne",
+        path: "in",
+        name: "in",
         component: listOne
       },
       {
-        path: "listTwo",
-        name: "listTwo",
+        path: "out",
+        name: "out",
         component: listTwo
       }
     ]
