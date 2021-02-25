@@ -28,25 +28,59 @@
       </a-row>
     </a-form>
     <div class="main">
-      <a-row class="btnRow" type="flex" justify="end">
-        <a-button icon="search">
-          重置
-        </a-button>
-        <a-button icon="search">
-          新增
-        </a-button>
-        <a-button type="primary" icon="search">
-          导出
-        </a-button>
-        <a-button icon="search">
-          导入
-        </a-button>
-        <a-space :size="12">
-          <a-icon type="reload" />
-          <a-icon type="setting" />
-        </a-space>
+      <a-row class="toolRow" type="flex" justify="space-between">
+        <h4 class="listTitle">列表展示</h4>
+        <a-row class="toolsBtn">
+          <!-- <a-button icon="plus-circle" type="primary">
+            新增
+          </a-button>
+          <a-button icon="export">
+            导出
+          </a-button>
+          <a-button icon="import">
+            导入
+          </a-button> -->
+          <a-space :size="12">
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>新增</span>
+              </template>
+              <a-button type="dashed" icon="plus-circle" />
+              <!-- <a-icon type="plus-circle" style="fontSize : 18px" /> -->
+            </a-tooltip>
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>导出</span>
+              </template>
+              <a-button type="dashed" icon="export" />
+              <!-- <a-icon type="export" style="fontSize : 18px" /> -->
+            </a-tooltip>
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>导入</span>
+              </template>
+              <a-button type="dashed" icon="import" />
+              <!-- <a-icon type="import" style="fontSize : 18px" /> -->
+            </a-tooltip>
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>刷新</span>
+              </template>
+              <a-button type="dashed" icon="reload" />
+              <!-- <a-icon type="reload" style="fontSize : 18px" /> -->
+            </a-tooltip>
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>设置</span>
+              </template>
+              <a-button icon="setting" />
+              <!-- <a-icon type="setting" style="fontSize : 18px" /> -->
+            </a-tooltip>
+          </a-space>
+        </a-row>
       </a-row>
-      <a-table :columns="columns" :data-source="list" class="table-one">
+      <a-table :columns="columns" :data-source="list" class="table-one"
+        :scroll="{x: 900}">
         <template slot="name" slot-scope="text">
           <a>{{ text }}</a>
         </template>
@@ -57,16 +91,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
-const renderContent = (value, row, index) => {
-  const obj = {
-    children: value,
-    attrs: {},
-  };
-  if (index === 3) {
-    obj.attrs.colSpan = 0;
-  }
-  return obj;
-};
+// const renderContent = (value, row, index) => {
+//   const obj = {
+//     children: value,
+//     attrs: {},
+//   };
+//   if (index === 3) {
+//     obj.attrs.colSpan = 0;
+//   }
+//   return obj;
+// };
 export default {
   data () {
     // const columns = [
@@ -171,7 +205,7 @@ export default {
       {
         title: '保存条件',
         dataIndex: 'saveCondition',
-        width: 150
+        width: 250
       },
       {
         title: '温度',
@@ -214,13 +248,25 @@ export default {
 .main {
   background-color: white;
   padding: 5px 10px;
-  .btnRow {
+  .toolRow {
     height: 60px;
     // line-height: 60px;
     align-items: center;
-    .ant-btn {
-      margin-right: 10px;
+    .listTitle {
+      padding: 0 10px;
+      font-weight: 600;
+    }
+    .toolsBtn {
+      .ant-btn {
+        margin-right: 10px;
+      }
     }
   }
+}
+</style>
+
+<style>
+.ant-table td {
+  white-space: nowrap;
 }
 </style>

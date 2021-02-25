@@ -16,12 +16,15 @@
       <a-col :span="4">
         <a-dropdown class="avaterName">
           <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-            <a-avatar style="backgroundColor:#87d068" icon="user" />
-            zzz
+            <a-avatar style="backgroundColor:#87d068" icon="user"
+              size="small" />
+            jiayingzi
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <a href="javascript:;">退出登录</a>
+              <a href="javascript:;">
+                <a-icon type="logout" /><span class="logoutText">退出登录</span>
+              </a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -91,8 +94,7 @@ export default {
 #rightMain {
   // padding: 5px;
   .routerIndex {
-    // min-height: 360px;
-    margin: 5px;
+    margin: 5px 10px;
   }
   ::v-deep .ant-tabs-bar {
     margin: 0;
@@ -105,6 +107,10 @@ export default {
   }
   .avaterName {
     float: right;
+    padding-right: 10px;
   }
+}
+.logoutText {
+  margin-left: 10px;
 }
 </style>

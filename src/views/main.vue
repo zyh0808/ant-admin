@@ -1,7 +1,7 @@
 <template>
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
     <a-layout-sider v-model="collapsed" collapsible>
-      <div class="logo" src="../assets/logo.png" />
+      <img class="logo" src="../assets/logo.png" alt="logo" />
       <left-menu></left-menu>
     </a-layout-sider>
     <a-layout class="home-main">
@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  // background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
 .ant-layout-header {

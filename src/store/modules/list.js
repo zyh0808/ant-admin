@@ -1,7 +1,7 @@
 const list = [];
 for (let i = 0; i < 100; i++) {
   list.push({
-    key: i.toString(),
+    key: (i + 1).toString(),
     name: '测试药品',
     proKey: 'HR-CS-666',
     standard: '7片/盒',

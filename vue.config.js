@@ -1,12 +1,25 @@
-const port = 8088
-function resolve (dir) {
-  return path.join(__dirname, dir)
-}
-const path = require('path')
+// function resolve (dir) {
+//   return path.join(__dirname, dir)
+// }
+// const path = require('path')
+const Timestamp = new Date().getTime()
 
 module.exports = {
   publicPath: "/",
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === "production") {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+        "console.log"
+      ];
+    }
+    config.output.filename = "js/[name].[hash:8]." + Timestamp + ".js";
+    config.output.chunkFilename = "js/[name].[hash:8]" + Timestamp + ".js";
+  },
   css: {
+    requireModuleExtension: true,
     loaderOptions: {
       // 给 sass-loader 传递选项
       sass: {
@@ -28,12 +41,5 @@ module.exports = {
         changeOrigin: true
       }
     }
-  },
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@': resolve('src')
-      }
-    }
-  },
-};
+  }
+}
