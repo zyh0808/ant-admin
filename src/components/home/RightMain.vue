@@ -100,10 +100,12 @@ export default {
     margin: 0;
   }
   .tabRow {
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     background-color: #fff;
-    padding-right: 10px;
+    // padding-right: 10px;
+    // padding-top: 5px;
+    padding: 5px 10px 0 5px;
   }
   .avaterName {
     float: right;

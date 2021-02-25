@@ -1,7 +1,7 @@
 import { myMenu } from "@/js/menu.js"
 const initialState = {
     tabs: [
-        { key: "home", title: '首页', icon: 'windows', closable: false }
+        { key: "drugDetail", title: '药品入库', closable: false }
     ],
     activeName: 'home'
 }

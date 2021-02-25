@@ -1,10 +1,9 @@
 <template>
-  <div id="chartOne">这是图表页一</div>
+  <div id="orderCheck">orderCheck</div>
 </template>
 <script>
 export default {
   created () {
-    // console.log('created 2')
   }
 }
 </script>

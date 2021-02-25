@@ -1,5 +1,5 @@
 <template>
-  <a-menu :default-selected-keys="['home']" :default-open-keys="['list']"
+  <a-menu :default-selected-keys="['drugDetail']" :default-open-keys="['drug']"
     mode="inline" theme="dark" :inline-collapsed="collapsed"
     @click="menuClicked">
     <template v-for="(item) in menu">

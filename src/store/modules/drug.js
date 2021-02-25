@@ -9,13 +9,13 @@ for (let i = 0; i < 100; i++) {
     dragNumber: 'P3616',
     inNumber: 1,
     park: '盒',
-    saveCondition: '遮光、密封、25℃以下',
+    saveCondition: '遮光、密封、25℃以下遮光、密封、25℃以下遮光、密封、25℃以下',
     temperature: '15℃～25℃'
   });
 }
 
 const initialState = {
-  list
+  drugDetailList: list
 }
 
 const state = () => ({
@@ -24,8 +24,8 @@ const state = () => ({
 
 // getters
 const getters = {
-  list: (state) => {
-    return state.list
+  drugDetailList: (state) => {
+    return state.drugDetailList
   }
 }
 

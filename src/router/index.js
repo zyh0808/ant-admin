@@ -3,21 +3,19 @@ import VueRouter from "vue-router"
 
 import login from './modules/login.js'
 import main from './modules/main.js'
-import list from './modules/list.js'
-import chart from './modules/chart.js'
-import home from './modules/home.js'
-import upload from './modules/upload.js'
+import drug from './modules/drug.js'
+import order from './modules/order.js'
+import system from './modules/system.js'
 
 
 Vue.use(VueRouter);
 
 const routes = [
   ...login,
-  ...home,
   ...main,
-  ...list,
-  ...chart,
-  ...upload
+  ...drug,
+  ...order,
+  ...system
 ];
 
 const router = new VueRouter({

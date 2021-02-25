@@ -1,10 +1,10 @@
 <template>
-  <div id="home">这是首页</div>
+  <div id="systemList">systemList</div>
 </template>
-
 <script>
 export default {
-
+  created () {
+  }
 }
 </script>
 

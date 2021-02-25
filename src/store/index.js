@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import createLogger from './logger/logger'
 import menu from './modules/menu'
 import user from './modules/user'
-import list from './modules/list'
+import drug from './modules/drug'
 
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
@@ -12,7 +12,7 @@ export default new Vuex.Store({
   modules: {
     menu,
     user,
-    list
+    drug
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <a-breadcrumb>
+      <a-breadcrumb-item>XX药品管理</a-breadcrumb-item>
+      <a-breadcrumb-item><a href="">药品详情 Center</a></a-breadcrumb-item>
+    </a-breadcrumb>
     <a-form class="search-form" :label-col="{ span: 6 }"
       :wrapper-col="{ span: 16 }" :form="searchForm" @submit="handleSearch">
       <a-row class="searchRow">
@@ -73,14 +77,14 @@
               <template slot="title">
                 <span>设置</span>
               </template>
-              <a-button icon="setting" />
+              <a-button type="dashed" icon="setting" />
               <!-- <a-icon type="setting" style="fontSize : 18px" /> -->
             </a-tooltip>
           </a-space>
         </a-row>
       </a-row>
-      <a-table :columns="columns" :data-source="list" class="table-one"
-        :scroll="{x: 900}">
+      <a-table :columns="columns" :data-source="drugDetailList"
+        class="table-one" :scroll="{x: 900}">
         <template slot="name" slot-scope="text">
           <a>{{ text }}</a>
         </template>
@@ -170,48 +174,58 @@ export default {
         title: '药品名称',
         dataIndex: 'name',
         width: 150,
-        fixed: 'left'
+        fixed: 'left',
+        scopedSlots: { customRender: 'name' },
+        ellipsis: true
       },
       {
         title: '项目号',
         dataIndex: 'proKey',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '规格',
         dataIndex: 'standard',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '药品批次号',
         dataIndex: 'draBatch',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '药品编号',
         dataIndex: 'dragNumber',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '入库数量',
         dataIndex: 'inNumber',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '包装',
         dataIndex: 'park',
-        width: 150
+        width: 150,
+        ellipsis: true
       },
       {
         title: '保存条件',
         dataIndex: 'saveCondition',
-        width: 250
+        width: 250,
+        ellipsis: true
       },
       {
         title: '温度',
         dataIndex: 'temperature',
         width: 150,
-        fixed: 'right'
+        fixed: 'right',
+        ellipsis: true
       }
     ]
     return {
@@ -220,7 +234,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      list: 'list/list'
+      drugDetailList: 'drug/drugDetailList'
     })
   },
   created () {
@@ -229,11 +243,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ant-breadcrumb {
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff;
+  padding: 0 30px;
+  // margin-top: 1px;
+}
 .table-one {
-  background-color: white;
+  // background-color: white;
+  ::v-deep .ant-table-thead > tr > th {
+    padding: 12px 8px;
+    overflow-wrap: break-word;
+  }
+  ::v-deep .ant-table-tbody > tr > td {
+    padding: 12px 8px;
+    overflow-wrap: break-word;
+  }
 }
 .search-form {
-  margin: 10px 0;
+  margin: 10px 20px;
   background-color: #fff;
   .searchRow {
     height: 60px;
@@ -248,9 +277,9 @@ export default {
 .main {
   background-color: white;
   padding: 5px 10px;
+  margin: 10px 20px;
   .toolRow {
     height: 60px;
-    // line-height: 60px;
     align-items: center;
     .listTitle {
       padding: 0 10px;
@@ -265,8 +294,4 @@ export default {
 }
 </style>
 
-<style>
-.ant-table td {
-  white-space: nowrap;
-}
-</style>
+

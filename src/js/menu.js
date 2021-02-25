@@ -1,18 +1,21 @@
 export const myMenu = [
-    { key: "home", name: '首页', icon: 'windows', hasChild: false, children: [] },
     {
-        key: "list", name: '列表', icon: 'wechat', hasChild: true, children: [
-            { key: "in", name: '药品入库' },
-            { key: "out", name: '药品出库' }
+        key: "drug", name: 'XX药品管理', icon: 'wechat', hasChild: true, children: [
+            { key: "drugDetail", name: '药品详情' },
+            { key: "drugIn", name: '药品入库' },
+            { key: "drugOut", name: '药品出库' },
+            { key: "drugBackin", name: '药品反药' }
         ]
     },
     {
-        key: "chart", name: '图表', icon: 'pie-chart', hasChild: true, children: [
-            { key: "chartOne", name: '图表一' },
-            { key: "chartTwo", name: '图表二' }
+        key: "order", name: '订单管理', icon: 'pie-chart', hasChild: true, children: [
+            { key: "orderCheck", name: '订单管理' }
         ]
     },
     {
-        key: "uploadImage", name: '上传图片', icon: 'file-image', hasChild: false
+        key: "system", name: '系统管理', icon: 'file-image', hasChild: true, children: [
+            { key: 'systemList', name: '系统列表' },
+            { key: 'systemRole', name: '角色管理' }
+        ]
     }
 ]

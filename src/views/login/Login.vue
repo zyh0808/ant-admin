@@ -175,7 +175,7 @@ export default {
         if (!err) {
           // console.log('Received values of form: ', values);
           this.login(values)
-          this.$router.push({ name: "home" })
+          this.$router.push({ name: "drugDetail" })
         }
       });
     },

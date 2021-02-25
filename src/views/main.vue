@@ -5,20 +5,6 @@
       <left-menu></left-menu>
     </a-layout-sider>
     <a-layout class="home-main">
-      <!-- <a-layout-header class="headerBox"
-        :style="{background: '#fff', height: '40px', lineHeight: '40px'}">
-        <a-dropdown class="avaterName">
-          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-            <a-avatar style="backgroundColor:#87d068" icon="user" />
-            zzz
-          </a>
-          <a-menu slot="overlay">
-            <a-menu-item>
-              <a href="javascript:;">退出登录</a>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
-      </a-layout-header> -->
       <a-layout-content>
         <right-main></right-main>
       </a-layout-content>
