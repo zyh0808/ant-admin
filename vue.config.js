@@ -28,16 +28,12 @@ module.exports = {
     }
   },
   devServer: {
-    // host: 'http://192.168.200.61',
-    port: 8088,
+    host: 'http://192.168.0.103',
+    port: 7000,
     inline: true,
     proxy: {
-      '/user': {
-        target: process.env.VUE_APP_URL,
-        changeOrigin: true
-      },
-      '/UpLoadFiles': {
-        target: process.env.VUE_APP_URL,
+      '/api': {
+        target: process.env.MEDICINE_URL,
         changeOrigin: true
       }
     }

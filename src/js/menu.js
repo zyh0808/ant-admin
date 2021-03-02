@@ -1,21 +1,38 @@
 export const myMenu = [
     {
-        key: "drug", name: 'XX药品管理', icon: 'wechat', hasChild: true, children: [
-            { key: "drugDetail", name: '药品详情' },
-            { key: "drugIn", name: '药品入库' },
-            { key: "drugOut", name: '药品出库' },
-            { key: "drugBackin", name: '药品反药' }
-        ]
+        key: "companyInfo", name: '公司信息', icon: 'home'
     },
     {
-        key: "order", name: '订单管理', icon: 'pie-chart', hasChild: true, children: [
-            { key: "orderCheck", name: '订单管理' }
-        ]
+        key: "institution", name: '组织机构', icon: 'apartment', rotate: 270
     },
     {
-        key: "system", name: '系统管理', icon: 'file-image', hasChild: true, children: [
-            { key: 'systemList', name: '系统列表' },
-            { key: 'systemRole', name: '角色管理' }
-        ]
+        key: "employeeManage", name: '员工管理', icon: 'team'
+    },
+    {
+        key: "roleManage", name: '角色管理', icon: 'solution'
+    },
+    {
+        key: "userManage", name: '用户管理', icon: 'user'
+    },
+    {
+        key: "systemInfo", name: '系统信息', icon: 'desktop'
+    },
+    {
+        key: "modulesManage", name: '模块管理', icon: 'appstore'
+    },
+    {
+        key: "authManage", name: '权限字典', icon: 'project'
+    },
+    {
+        key: "administrativeManage", name: '行政区域', icon: 'compass'
+    },
+    {
+        key: "dictionaryInfo", name: '字典信息', icon: 'book'
+    },
+    {
+        key: "serialNumber", name: '编号种子', icon: 'key'
+    },
+    {
+        key: "systemLog", name: '系统日志', icon: 'table'
     }
 ]

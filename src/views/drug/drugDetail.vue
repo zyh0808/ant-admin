@@ -2,7 +2,7 @@
   <div>
     <a-breadcrumb>
       <a-breadcrumb-item>XX药品管理</a-breadcrumb-item>
-      <a-breadcrumb-item><a href="">药品详情 Center</a></a-breadcrumb-item>
+      <a-breadcrumb-item><a href="">药品详情</a></a-breadcrumb-item>
     </a-breadcrumb>
     <a-form class="search-form" :label-col="{ span: 6 }"
       :wrapper-col="{ span: 16 }" :form="searchForm" @submit="handleSearch">

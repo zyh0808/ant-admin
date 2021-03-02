@@ -2,20 +2,14 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 
 import login from './modules/login.js'
-import main from './modules/main.js'
-import drug from './modules/drug.js'
-import order from './modules/order.js'
-import system from './modules/system.js'
+import employee from './modules/employee.js'
 
 
 Vue.use(VueRouter);
 
 const routes = [
   ...login,
-  ...main,
-  ...drug,
-  ...order,
-  ...system
+  ...employee
 ];
 
 const router = new VueRouter({

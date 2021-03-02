@@ -1,13 +1,19 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <a-config-provider :locale="zh_CN">
+    <div id="app">
+      <router-view />
+    </div>
+  </a-config-provider>
 </template>
 <script>
+import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import moment from "moment";
+import "moment/locale/zh-cn";
 export default {
-  created () {
-    if (this.$route.name !== 'login' && this.$route.name !== 'home') {
-      this.$router.replace({ name: 'home' })
+  name: "app",
+  data () {
+    return {
+      zh_CN
     }
   }
 }
@@ -19,6 +25,10 @@ export default {
   padding: 0;
 }
 #app {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  font-family: Microsoft YaHei;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
