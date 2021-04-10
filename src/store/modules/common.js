@@ -18,7 +18,10 @@ const getters = {
 const mutations = {
   setPageHeaderRoutes (state, list) {
     state.pageHeaderRoutes = list
-  }
+  },
+  resetAllData (state) {
+    state = Object.assign(state, initialState)
+  },
 }
 
 // actions

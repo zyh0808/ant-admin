@@ -1,8 +1,14 @@
-import { service, jsonService } from '@/js/request'
+import { service } from '@/js/request'
+
+// let API = 'http://192.168.0.103:16800'
+let API = ''
+if (process.env.NODE_ENV === "production") {
+  API = 'http://123.57.86.56:16800'
+}
 
 export function login (data) {
   return service({
-    url: '/api/pub/user/check_login',
+    url: API + '/api/pub/user/check_login',
     method: 'post',
     data
   })
@@ -10,22 +16,23 @@ export function login (data) {
 
 export function user_auth (data) {
   return service({
-    url: '/api/pub/user/user_auth',
+    url: API + '/api/pub/user/user_auth',
     method: 'post',
     data
   })
 }
 
-export function userAuth () {
-  return jsonService({
-    url: './json/auth.json',
-    method: 'get'
+export function logout (data) {
+  return service({
+    url: API + '/api/pub/user/logout',
+    method: 'post',
+    data
   })
 }
 
-export function logout (data) {
+export function editPsw (data) {
   return service({
-    url: '/api/pub/user/logout',
+    url: API + '/api/pub/user/change_password',
     method: 'post',
     data
   })

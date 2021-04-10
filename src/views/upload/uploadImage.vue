@@ -34,7 +34,7 @@ export default {
       upLoading: false,
       previewVisible: false,
       previewImage: '',
-      fileList: []
+      fileList: [],
     }
   },
   methods: {

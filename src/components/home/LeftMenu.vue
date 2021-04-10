@@ -10,7 +10,7 @@
         </a-menu-item>
       </a-sub-menu>
       <a-menu-item :key="item.id" v-else>
-        <!-- <a-icon :type="item.icon" :rotate="item.rotate" /> -->
+        <a-icon :type="item.icon" />
         <span>{{item.name}}</span>
       </a-menu-item>
     </template>
@@ -47,17 +47,20 @@ export default {
       setAuthList: 'userInfo/setAuthList'
     }),
     subModuleHandle (e) {
-      const pageAuth = this.pageAuthList.find(item => item.module_id === e.key)
-      const currentRouter = pageAuth ? pageAuth.url_addr : ''
-      const authList = pageAuth ? pageAuth.auth_list : []
+      const { key } = e
+      const module = this.subModuleList.find(item => item.id === key)
+      const currentRouter = module ? module.url : ''
       this.setCurrentRouter(currentRouter)
+
+      const pageAuth = this.pageAuthList.find(item => item.module_id === key)
+      const authList = pageAuth ? pageAuth.auth_list : []
       this.setAuthList(authList)
       this.$router.push({ name: currentRouter })
     }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .ant-menu {
   border-right: none;
 }

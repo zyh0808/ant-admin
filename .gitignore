@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/medicine
+/drug
 
 # local env files
 .env.local

@@ -1,4 +1,4 @@
-import Login from "../../views/login/Login.vue"
+// import login from "../../views/login/login.vue"
 
 const routes = [
   {
@@ -8,8 +8,12 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: Login
-  },
+    // component: login,
+    component: resolve => require(['../../views/login/login'], resolve),
+    meta: {
+      title: "用户登录"
+    }
+  }
 ]
 
 export default routes

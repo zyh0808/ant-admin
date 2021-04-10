@@ -42,7 +42,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .ant-menu {
   border-right: none;
 }

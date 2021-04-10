@@ -3,13 +3,18 @@ import VueRouter from "vue-router"
 
 import login from './modules/login.js'
 import employee from './modules/employee.js'
+import wms from './modules/wms.js'
+import entry from './modules/entry.js'
 
 
 Vue.use(VueRouter);
+// if (!window.VueRouter) Vue.use(Router)
 
 const routes = [
   ...login,
-  ...employee
+  ...employee,
+  ...wms,
+  ...entry
 ];
 
 const router = new VueRouter({

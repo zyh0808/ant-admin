@@ -1,8 +1,5 @@
-// import { login, register } from '@/api/user.js'
-// import { Message } from 'ant-design-vue'
 const initialState = {
-    userInfo: {
-    },
+    userInfo: {},
     moduleList: [],
     currentModule: [],
     subModuleList: [],
@@ -45,6 +42,9 @@ const getters = {
     },
     authInfo: (state) => {
         return state.authInfo
+    },
+    userInfo: (state) => {
+        return state.userInfo
     }
 }
 
@@ -59,17 +59,18 @@ const mutations = {
     setCurrentModule (state, key) {
         state.currentModule = [key]
         const module = state.moduleList.find(item => item.id === key)
-        state.subModuleList = module.childrens
-        state.currentSubModule.splice(0, 1, state.subModuleList[0].id)
+        state.subModuleList = module ? module.childrens : []
+        state.currentSubModule = [state.subModuleList[0].id]
+        state.currentRouter = state.subModuleList[0].url
+        // state.currentSubModule.splice(0, 1, state.subModuleList[0].id)
         const pageAuth = state.pageAuthList.find(item => item.module_id === state.subModuleList[0].id)
-        state.currentRouter = pageAuth.url_addr
         state.authList = pageAuth.auth_list
     },
     setCurrentSubModule (state, current) {
         state.currentSubModule = current
     },
     setCurrentRouter (state, current) {
-        state.currentSubModule = current
+        state.currentRouter = current
     },
     setAuthList (state, list) {
         state.authList = list
@@ -94,33 +95,7 @@ const mutations = {
 
 // actions
 const actions = {
-    // login ({ commit }, loginInfo) {
-    //     const { username, password } = loginInfo
-    //     login({ username: username, password: password }).then(response => {
-    //         // const { data } = response
-    //         // commit('setToken', data.token)
-    //     }).catch(error => {
-    //         Message.error(error.msg)
-    //     })
-    // },
-    // register ({ commit }, registerInfo) {
-    //     const { username, password, passwordConfirm, email, phone, question = '问题', answer = '答案' } = registerInfo
-    //     register({
-    //         username: username,
-    //         password: password,
-    //         passwordConfirm: passwordConfirm,
-    //         email: email,
-    //         phone: phone,
-    //         question: question,
-    //         answer: answer
-    //     }).then(response => {
-    //         Message.error('注册成功，请前往登录！')
-    //     }).catch(error => {
-    //         Message.error(error.msg)
-    //     })
-    // }
 }
-
 
 export default {
     namespaced: true,

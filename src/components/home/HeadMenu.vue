@@ -19,7 +19,8 @@ export default {
   computed: {
     ...mapGetters({
       moduleList: 'userInfo/moduleList',
-      currentModule: 'userInfo/currentModule'
+      currentModule: 'userInfo/currentModule',
+      currentRouter: 'userInfo/currentRouter'
     })
   },
   methods: {
@@ -28,11 +29,12 @@ export default {
     }),
     moduleHandle (e) {
       this.setCurrentModule(e.key)
+      this.$router.push({ name: this.currentRouter })
     }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .ant-menu-item-selected {
   height: 48px;
 }
