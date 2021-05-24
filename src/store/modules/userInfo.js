@@ -43,6 +43,9 @@ const getters = {
     authInfo: (state) => {
         return state.authInfo
     },
+    authList: (state) => {
+        return state.authList
+    },
     userInfo: (state) => {
         return state.userInfo
     }
@@ -90,6 +93,8 @@ const mutations = {
     },
     resetAllData (state) {
         state = Object.assign(state, initialState)
+    },
+    resetFetching (state) {
     }
 }
 

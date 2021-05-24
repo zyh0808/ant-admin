@@ -3,9 +3,7 @@
     <a-row class="toolRow" type="flex" justify="space-between">
       <div>
         <a-row type="flex">
-          <div v-for="item in status" :key="item.index"
-            :class="activeStatus=== item.index? 'status-btn active-btn': 'status-btn'"
-            @click="changeActive(item.index)">
+          <div v-for="item in status" :key="item.index" :class="activeStatus=== item.index? 'status-btn active-btn': 'status-btn'" @click="changeActive(item.index)">
             <span>{{item.name}}</span>
             <div class="bg-line"></div>
           </div>
@@ -24,16 +22,14 @@
               <template slot="title">
                 <span>设置</span>
               </template>
-              <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+              <columnSelect :plainOptions="columns" @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
       </div>
     </a-row>
-    <a-table :columns="tableColumns" :data-source="taskOrderList" ref="tableRef"
-      class="table-list" :rowKey="record => record.order_no"
-      :pagination="false">
+    <a-table :columns="tableColumns" :data-source="taskOrderList" ref="tableRef" class="table-list" :rowKey="record => record.order_no" :pagination="false">
+      <a slot="order_no" slot-scope="text" @click="showTaskOrderInfo">{{text}}</a>
       <span slot="status" slot-scope="status">
         <a-tag v-if="status === '待确认'" color="red">
           待确认
@@ -42,11 +38,12 @@
           已确认
         </a-tag>
       </span>
-      <div slot="expandedRowRender" slot-scope="record">
+      <a slot="drug_count" slot-scope="text" @click="showDrug">{{text}}</a>
+      <!-- <div slot="expandedRowRender" slot-scope="record">
         <a-row class="table-row">
           <a-col :span="8">入库仓库: <span>{{record.house}}</span></a-col>
           <a-col :span="8">申办方编码: <span>{{record.client_code}}</span></a-col>
-          <a-col :span="8">申办方编码: <span>{{record.client_name}}</span></a-col>
+          <a-col :span="8">申办方名称: <span>{{record.client_name}}</span></a-col>
         </a-row>
         <a-row class="table-row">
           <a-col :span="8">项目号: <span>{{record.pro_no}}</span></a-col>
@@ -57,8 +54,8 @@
           <a-col :span="8">药品规格: <span>{{record.spec}}</span></a-col>
           <a-col :span="8">有效期至: <span>{{record.drug_date}}</span></a-col>
         </a-row>
-      </div>
-      <template slot="action">
+      </div> -->
+      <!-- <template slot="action">
         <a-button type="link" size="small" @click="showDrug('drug')">
           药品明细
         </a-button>
@@ -66,29 +63,33 @@
         <a-button type="link" size="small" @click="showDrug('receive')">
           收货明细
         </a-button>
-      </template>
+      </template> -->
     </a-table>
-    <a-table :columns="tableColumns" :class="showSticky ? 'sticky-table'  : ''"
-      ref="stickyTableRef" :style="{display: 'none',width: stickyWidth + 'px'}"
-      table-layout="fixed">
+    <a-table :columns="tableColumns" :class="showSticky ? 'sticky-table'  : ''" ref="stickyTableRef" :style="{display: 'none',width: stickyWidth + 'px'}" table-layout="fixed">
       <div slot="expandedRowRender">
       </div>
     </a-table>
-    <a-drawer :title="drugListTitle" width="250px" :visible="drugDrawerVisible"
-      @close="onClose">
-      <!-- <a-list class="code-list">
-        <RecycleScroller v-infinite-scroll="appendMore"
-          class="infinite-drug-code" :items="codeList" :item-size="40"
-          key-field="code" :infinite-scroll-disabled="busy"
-          :infinite-scroll-distance="1">
-          <a-list-item slot-scope="{item}">
-            {{item.code}}
-          </a-list-item>
-        </RecycleScroller>
-        <div v-if="loading && !busy" class="loading-container">
-          <a-spin />
-        </div>
-      </a-list> -->
+    <a-drawer title="任务单详情" width="500" :visible="isShowTaskOrderInfo" @close="closeTaskOrderInfo">
+      <!-- <taskOrderDetailNew></taskOrderDetailNew> -->
+      <a-divider></a-divider>
+      <drugInfoDetail></drugInfoDetail>
+      <div :style="{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          borderTop: '1px solid #e9e9e9',
+          padding: '10px 16px',
+          background: '#fff',
+          textAlign: 'right',
+          zIndex: 1,
+        }">
+        <a-button :style="{ marginRight: '8px' }" @click="closeTaskOrderInfo">
+          关闭
+        </a-button>
+      </div>
+    </a-drawer>
+    <a-drawer title="药品条形码" width="250" :visible="drugDrawerVisible" @close="closeDrug" class="code-drawer">
       <codeList></codeList>
       <div :style="{
           position: 'absolute',
@@ -101,7 +102,7 @@
           textAlign: 'right',
           zIndex: 1,
         }">
-        <a-button :style="{ marginRight: '8px' }" @click="onClose">
+        <a-button :style="{ marginRight: '8px' }" @click="closeDrug">
           关闭
         </a-button>
       </div>
@@ -110,26 +111,13 @@
 </template>
 
 <script>
-// import infiniteScroll from 'vue-infinite-scroll'
-// import { RecycleScroller } from 'vue-virtual-scroller'
-// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import columnSelect from '@/components/columnSelect.vue'
 import codeList from '@/components/entry/codeList.vue'
+// import taskOrderDetailNew from '@/components/entry/detail/taskOrderDetailNew'
+import drugInfoDetail from '@/components/entry/detail/drugInfoDetail'
 import { mapGetters } from 'vuex'
-// import { PrefixInteger } from '@/js/utils.js'
-// function getCodeList (num, startIndex) {
-//   let list = []
-//   for (let i = startIndex; i < startIndex + num; i++) {
-//     const fixedNum = PrefixInteger(i, 5)
-//     const code = `code${fixedNum}`
-//     list.push({ key: i + '', code })
-//   }
-//   return list
-// }
-// const codeList = getCodeList(10000, 0)
 
 export default {
-  // directives: { infiniteScroll },
   data () {
     const columns = [
       {
@@ -137,7 +125,8 @@ export default {
         dataIndex: 'order_no',
         value: 'order_no',
         width: 150,
-        ellipsis: true
+        ellipsis: true,
+        scopedSlots: { customRender: 'order_no' }
       },
       {
         title: '订单时间',
@@ -150,7 +139,7 @@ export default {
         title: '订单状态',
         dataIndex: 'order_status',
         value: 'order_status',
-        width: 100,
+        // width: 100,
         key: 'status',
         scopedSlots: { customRender: 'status' }
       },
@@ -158,14 +147,35 @@ export default {
         title: '药品名称',
         dataIndex: 'drug_name',
         value: 'drug_name',
-        width: 150,
+        // width: 150,
         ellipsis: true
       },
       {
         title: '药品批号',
         dataIndex: 'drug_batch',
         value: 'drug_batch',
-        width: 150,
+        // width: 150,
+        ellipsis: true
+      },
+      {
+        title: '入库仓库',
+        dataIndex: 'house',
+        value: 'house',
+        // width: 100,
+        ellipsis: true
+      },
+      {
+        title: '申办方名称',
+        dataIndex: 'client_name',
+        value: 'client_name',
+        // width: 100,
+        ellipsis: true
+      },
+      {
+        title: '项目名称',
+        dataIndex: 'pro_name',
+        value: 'pro_name',
+        // width: 100,
         ellipsis: true
       },
       {
@@ -173,22 +183,16 @@ export default {
         dataIndex: 'drug_count',
         value: 'drug_count',
         width: 100,
-        ellipsis: true
-      },
-      {
-        title: '收货数量',
-        dataIndex: 'receiveCount',
-        value: 'receiveCount',
-        width: 100,
-        ellipsis: true
-      },
-      {
-        title: '操作',
-        key: 'action',
-        value: 'action',
-        width: 200,
-        scopedSlots: { customRender: 'action' }
+        // ellipsis: true,
+        scopedSlots: { customRender: 'drug_count' }
       }
+      // {
+      //   title: '操作',
+      //   key: 'action',
+      //   value: 'action',
+      //   width: 200,
+      //   scopedSlots: { customRender: 'action' }
+      // }
     ]
     return {
       columns,
@@ -205,18 +209,17 @@ export default {
       ],
       activeStatus: 0,
       drugDrawerVisible: false,
-      drugListTitle: '',
       codeList,
-      busy: false,
-      loading: false,
       showSticky: false,
-      stickyWidth: 0
+      stickyWidth: 0,
+      isShowTaskOrderInfo: false
     }
   },
   components: {
     columnSelect,
-    codeList
-    // RecycleScroller
+    codeList,
+    taskOrderDetailNew,
+    drugInfoDetail
   },
   computed: {
     ...mapGetters({
@@ -227,27 +230,27 @@ export default {
     this.tableList = this.$refs.tableRef.$el
     this.stickyWidth = this.tableList.clientWidth
     this.tableList.addEventListener('scroll', this.handleTableScroll, true)
-    // this.table = this.$refs.tableRef.$el
-    // this.stickyWidth = this.table.querySelector('.table-list').clientWidth
-    // this.table.addEventListener('scroll', this.handleTableScroll, true)
   },
   methods: {
-    showDrug (mode) {
+    showDrug () {
       this.drugDrawerVisible = true
-      this.drugListTitle = mode === 'drug' ? '药品明细' : '收货明细'
     },
-    showDetail () { },
-    appendMore () { },
-    onClose () {
+    closeDrug () {
       this.drugDrawerVisible = false
+    },
+    showTaskOrderInfo () {
+      this.isShowTaskOrderInfo = true
+    },
+    closeTaskOrderInfo () {
+      this.isShowTaskOrderInfo = false
     },
     changeActive (value) {
       this.activeStatus = value
     },
     reloadList () {
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
+    changeColumns (columns) {
+      this.tableColumns = columns
     },
     changeShowSticky (status) {
       this.showSticky = status
@@ -302,29 +305,11 @@ export default {
   height: 32px;
   line-height: 32px;
 }
-/deep/ .ant-drawer-body {
-  padding: 0;
-  height: calc(100% - 62px);
-}
-.code-list {
-  height: 100%;
-}
-.infinite-drug-code {
-  // border: 1px solid #e8e8e8;
-  border-radius: 4px;
-  overflow: auto;
-  padding: 8px 24px;
-  height: calc(100vh - 108px);
-}
-.loading-container {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  text-align: center;
-}
-/deep/ .ant-list-item {
-  padding: 8px 16px;
-  border-bottom: 1px solid #e8e8e8 !important;
+.code-drawer {
+  /deep/ .ant-drawer-body {
+    padding: 0;
+    height: calc(100% - 62px);
+  }
 }
 .sticky-table {
   display: block !important;

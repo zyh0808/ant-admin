@@ -23,9 +23,13 @@ import drug from './modules/wms/drug'
 import site from './modules/wms/site'
 import house from './modules/wms/house'
 import box from './modules/wms/box'
+import inkscreen from './modules/wms/inkscreen'
 
 import input from './modules/entry/input'
 import allot from './modules/entry/allot'
+import pack from './modules/entry/pack'
+import order from './modules/entry/order'
+import inhouse from './modules/entry/inhouse'
 
 
 Vue.use(Vuex)
@@ -51,8 +55,12 @@ const modules = {
   site,
   house,
   box,
+  inkscreen,
   input,
-  allot
+  allot,
+  pack,
+  order,
+  inhouse
 }
 
 const mutations = {

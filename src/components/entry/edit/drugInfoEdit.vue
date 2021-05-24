@@ -99,12 +99,6 @@ const drugColumns = [
   }
 ]
 export default {
-  props: {
-    pageType: {
-      type: String,
-      default: '0'
-    }
-  },
   data () {
     return {
       // columns,

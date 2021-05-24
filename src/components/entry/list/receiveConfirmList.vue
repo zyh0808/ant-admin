@@ -3,9 +3,7 @@
     <a-row class="toolRow" type="flex" justify="space-between">
       <div>
         <a-row type="flex">
-          <div v-for="item in status" :key="item.index"
-            :class="activeStatus=== item.index? 'status-btn active-btn': 'status-btn'"
-            @click="changeActive(item.index)">
+          <div v-for="item in status" :key="item.index" :class="activeStatus=== item.index? 'status-btn active-btn': 'status-btn'" @click="changeActive(item.index)">
             <span>{{item.name}}</span>
             <div class="bg-line"></div>
           </div>
@@ -24,16 +22,13 @@
               <template slot="title">
                 <span>设置</span>
               </template>
-              <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+              <columnSelect :plainOptions="columns" @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
       </div>
     </a-row>
-    <a-table :columns="tableColumns" :data-source="taskOrderList" ref="tableRef"
-      class="table-list" :rowKey="record => record.order_no"
-      :pagination="false">
+    <a-table :columns="tableColumns" :data-source="taskOrderList" ref="tableRef" class="table-list" :rowKey="record => record.order_no" :pagination="false">
       <span slot="status" slot-scope="status">
         <a-tag v-if="status === '待确认'" color="red">
           待确认
@@ -52,23 +47,15 @@
         </a-button>
       </template>
     </a-table>
-    <a-table :columns="tableColumns" :class="showSticky ? 'sticky-table'  : ''"
-      ref="stickyTableRef" :style="{display: 'none',width: stickyWidth + 'px'}"
-      table-layout="fixed">
+    <a-table :columns="tableColumns" :class="showSticky ? 'sticky-table'  : ''" ref="stickyTableRef" :style="{display: 'none',width: stickyWidth + 'px'}" table-layout="fixed">
       <div slot="expandedRowRender">
       </div>
     </a-table>
-    <a-drawer title="任务单信息" width="520" :closable="false"
-      :visible="detailVisible" @close="onDetailClose"
-      class="task-order-detail-drawer">
+    <a-drawer title="任务单信息" width="520" :closable="false" :visible="detailVisible" @close="onDetailClose" class="task-order-detail-drawer">
       <taskOrderDetail @showDrug="showDrug(arguments)"></taskOrderDetail>
-      <a-drawer :title="drugListTitle" width="250" :visible="drugDrawerVisible"
-        @close="drugClose" class="drug-list-drawer">
+      <a-drawer :title="drugListTitle" width="250" :visible="drugDrawerVisible" @close="drugClose" class="drug-list-drawer">
         <a-list class="code-list">
-          <RecycleScroller v-infinite-scroll="appendMore"
-            class="infinite-drug-code" :items="codeList" :item-size="40"
-            key-field="code" :infinite-scroll-disabled="busy"
-            :infinite-scroll-distance="1">
+          <RecycleScroller v-infinite-scroll="appendMore" class="infinite-drug-code" :items="codeList" :item-size="40" key-field="code" :infinite-scroll-disabled="busy" :infinite-scroll-distance="1">
             <a-list-item slot-scope="{item}">
               {{item.code}}
             </a-list-item>
@@ -97,9 +84,7 @@
         </a-button>
       </div>
     </a-drawer>
-    <a-modal title="收货确认" :visible="confirmModalVisible"
-      :confirm-loading="confirmLoading" okText="保存" @ok="handleConfirm"
-      @cancel="confirmCancel" :width="700">
+    <a-modal title="收货确认" :visible="confirmModalVisible" :confirm-loading="confirmLoading" okText="保存" @ok="handleConfirm" @cancel="confirmCancel" :width="700">
 
       <a-card title="任务单信息" style="width: 100%">
         <a-descriptions title="" :column="3">
@@ -107,8 +92,7 @@
             <span>{{taskOrderInfo.order_no}}</span>
           </a-descriptions-item>
           <a-descriptions-item label="任务单状态">
-            <a-badge v-if="taskOrderInfo.order_status === '待确认'" status="error"
-              text="待确认" />
+            <a-badge v-if="taskOrderInfo.order_status === '待确认'" status="error" text="待确认" />
             <a-badge v-else status="success" text="已确认" />
           </a-descriptions-item>
           <a-descriptions-item label="入库仓库">
@@ -126,9 +110,7 @@
         </a-descriptions>
       </a-card>
       <a-card title="拆零信息" style="margin-top:10px; width: 100%">
-        <a-form-model :model="confirmForm" :rules="confirmFormRules"
-          :label-col="{ span: 12 }" :wrapper-col="{ span: 12 }"
-          class="confirm-form">
+        <a-form-model :model="confirmForm" :rules="confirmFormRules" :label-col="{ span: 12 }" :wrapper-col="{ span: 12 }" class="confirm-form">
           <a-row>
             <a-col :span="6">
               <a-form-model-item label="原药品数量">
@@ -141,8 +123,7 @@
               </a-form-model-item>
             </a-col>
             <a-col :span="2" class="form-icon">
-              <a-icon type="swap-right"
-                :style="{color: '#000',fontSize: '32px'}" />
+              <a-icon type="swap-right" :style="{color: '#000',fontSize: '32px'}" />
             </a-col>
             <a-col :span="10">
               <a-form-model-item label="确认后药品数量" prop="confirmCount">
@@ -160,8 +141,7 @@
               </a-form-model-item>
             </a-col>
             <a-col :span="2" class="form-icon">
-              <a-icon type="swap-right"
-                :style="{color: '#000',fontSize: '32px'}" />
+              <a-icon type="swap-right" :style="{color: '#000',fontSize: '32px'}" />
             </a-col>
             <a-col :span="10">
               <a-form-model-item label="确认后包装" prop="confirmPacket">
@@ -169,10 +149,8 @@
               </a-form-model-item>
             </a-col>
           </a-row>
-          <a-form-model-item label="备注" prop="mark" :label-col="{ span: 3}"
-            :wrapper-col="{ span: 21 }">
-            <a-input type="textarea" v-model="confirmForm.mark"
-              placeholder="请输入" />
+          <a-form-model-item label="备注" prop="mark" :label-col="{ span: 3}" :wrapper-col="{ span: 21 }">
+            <a-input type="textarea" v-model="confirmForm.mark" placeholder="请输入" />
           </a-form-model-item>
         </a-form-model>
       </a-card>
@@ -349,8 +327,8 @@ export default {
     },
     reloadList () {
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
+    changeColumns (columns) {
+      this.tableColumns = columns
     },
     changeShowSticky (status) {
       this.showSticky = status

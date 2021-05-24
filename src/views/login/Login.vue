@@ -3,14 +3,14 @@
     <a-layout-content class="login-content">
       <div id="login" class="login-main">
         <div class="logo">
-          <!-- <img alt="logo" height="50" width="150"
-            src="../../assets/login/logo.png" /> -->
+          <img alt="logo" height="50" width="150"
+            src="../../assets/login/logo.png" />
         </div>
         <!-- <div>
           <a href="http://192.168.0.103:7000/login" target="_self"
             class="title">MMC</a>
         </div> -->
-        <!-- <div class="subTitle">专业药品管理中心信息平台</div> -->
+        <div class="subTitle">专业药品管理中心信息平台</div>
         <!-- <div class="subTitle">MMC药品管理中心</div> -->
         <a-form :form="loginForm" @submit="loginSubmit" labelAlign="left"
           class="login-tab">
@@ -49,16 +49,17 @@
       </div>
     </a-layout-content>
     <a-layout-footer>
-      <!-- <div class="login-footer">
+      <div class="login-footer">
         Copyright
         <a-icon type="copyright" />
         城市映急
-      </div> -->
+      </div>
     </a-layout-footer>
   </a-layout>
 </template>
 <script>
 import { isMobile } from '@/js/utils.js'
+// import { testBigscreen } from '@/api/user'
 import { login, user_auth, userAuth } from '@/api/user.js'
 import { SHA256 } from '@/js/crypt.js'
 import { mapGetters, mapMutations } from 'vuex';
@@ -113,6 +114,7 @@ export default {
     },
     loginSubmit (e) {
       e.preventDefault();
+      // testBigscreen({}).then(res => { })
       this.loginForm.validateFields((err, values) => {
         if (!err) {
           this.isLogin = true

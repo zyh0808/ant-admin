@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
   window.document.title =
-    to.meta.title == undefined ? "MMC药品管理中心" : to.meta.title;
+    to.meta.title == null ? "MMC药品管理中心" : to.meta.title;
   next();
 });
 

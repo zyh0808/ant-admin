@@ -3,10 +3,11 @@ import {
   Button, message, Layout, Menu, Icon, Tabs, Form, Input, Row, Col, Modal,
   Table, Popconfirm, TreeSelect, FormModel, Checkbox, DatePicker, Upload, Dropdown,
   Avatar, Space, Tooltip, Breadcrumb,
-  PageHeader, AutoComplete, List, Spin, Switch, Divider, InputNumber, Pagination, ConfigProvider, Card, Tree, Select, Transfer, Tag, Affix, Popover, Radio, Drawer, Descriptions, Empty, Badge
+  PageHeader, AutoComplete, List, Spin, Switch, Divider, InputNumber, Pagination, ConfigProvider, Card, Tree, Select, Transfer, Tag, Affix, Popover, Radio, Drawer, Descriptions, Empty, Badge, Statistic
 } from 'ant-design-vue'
 
 import infiniteScroll from 'vue-infinite-scroll'
+import './directives/action'
 Vue.use(infiniteScroll)
 
 Vue.use(Button).use(Layout).use(Menu).use(Icon)
@@ -18,6 +19,6 @@ Vue.use(Button).use(Layout).use(Menu).use(Icon)
   .use(Divider).use(InputNumber).use(Pagination).use(ConfigProvider)
   .use(Card).use(Tree).use(Select).use(Transfer).use(Tag).use(Affix)
   .use(Popover).use(Radio).use(Drawer).use(Descriptions).use(Empty)
-  .use(Badge)
+  .use(Badge).use(Statistic)
 Vue.prototype.$message = message
 Vue.prototype.$confirm = Modal.confirm

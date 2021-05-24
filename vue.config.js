@@ -1,6 +1,7 @@
 const Timestamp = new Date().getTime()
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV === 'production'
+const isTest = process.env.NODE_ENV === 'test'
 // 本地环境是否需要使用cdn
 const devNeedCdn = false
 // cdn链接
@@ -120,12 +121,15 @@ module.exports = {
       }
     }
   },
-  devServer: !isProduction ? {
+  devServer: !isTest && !isProduction ? {
     inline: true,
     proxy: {
       '/api': {
         target: process.env.VUE_APP_MEDICINEURL,
         changeOrigin: true
+        // pathRewrite: {
+        //   "^/api": ""
+        // }
       }
     }
   } : {}

@@ -1,4 +1,4 @@
-import { getTempRangePageList, getHousePageList, getHouseList, getTempRangeList, getSetTempList, getShelfKindPageList, getShelfPageList, getShelfKindList, getCellPageList } from '@/api/wms.js'
+import { getTempRangePageList, getHousePageList, getHouseList, getTempRangeList, getSetTempList, getShelfKindPageList, getShelfPageList, getShelfKindList, getCellPageList, getShelfList, getCellList } from '@/api/wms.js'
 import { Message } from 'ant-design-vue'
 
 const initialHouseState = {
@@ -26,6 +26,20 @@ const initialShelfState = {
 const initialCellState = {
   isfetchCellList: false,
   cellList: [],
+  cellStatusArray: [
+    {
+      index: 0,
+      name: '空闲'
+    },
+    {
+      index: 1,
+      name: '占用'
+    },
+    {
+      index: 2,
+      name: '锁定'
+    }
+  ]
 }
 const initialState = {
   ...initialHouseState,
@@ -90,6 +104,9 @@ const getters = {
   cellTotal: (state) => {
     return state.cellTotal
   },
+  cellStatusArray: (state) => {
+    return state.cellStatusArray
+  }
 }
 
 // mutations
@@ -142,7 +159,7 @@ const mutations = {
     state.isfetchSetTempList = false
   },
   setSetTempList (state, list) {
-    list = list.map(item => item.temp_range_id)
+    // list = list.map(item => item.temp_range_id)
     state.setTempList = list
   },
   startFetchShelfKindList (state) {
@@ -351,6 +368,18 @@ const actions = {
       Message.error(err.msg)
     })
   },
+  fetchShelfList ({ state, commit }, params) {
+    if (state.isfetchShelfList) return
+    commit('startFetchShelfList')
+    getShelfList(params).then(res => {
+      commit('setShelfList', res)
+      commit('stopFetchShelfList')
+    }).catch(err => {
+      commit('setShelfList', [])
+      commit('stopFetchShelfList')
+      Message.error(err.msg)
+    })
+  },
   fetchCellPageList ({ state, commit }, params) {
     if (state.isfetchCellList) return
     commit('startFetchCellList')
@@ -377,6 +406,18 @@ const actions = {
       Message.error(err.msg)
     })
   },
+  fetchCellList ({ state, commit }, params) {
+    if (state.isfetchCellList) return
+    commit('startFetchCellList')
+    getCellList(params).then(res => {
+      commit('setCellList', res)
+      commit('stopFetchCellList')
+    }).catch(err => {
+      commit('setCellList', [])
+      commit('stopFetchCellList')
+      Message.error(err.msg)
+    })
+  }
 }
 
 export default {

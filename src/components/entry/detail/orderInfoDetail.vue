@@ -1,17 +1,17 @@
 <template>
   <div class="detail-item">
-    <a-descriptions title="" :column="4">
-      <a-descriptions-item label="入库订单号">
-        {{orderForm.order_no}}
+    <a-descriptions title="订单信息" :column="2">
+      <a-descriptions-item label="入库订单号" :span="2">
+        {{orderInfo.drug_in_no}}
       </a-descriptions-item>
       <a-descriptions-item label="订单状态">
-        {{orderForm.order_status}}
-      </a-descriptions-item>
-      <a-descriptions-item label="入库仓库">
-        {{orderForm.house}}
+        <a-badge v-if="orderInfo.status === 1" status="error" text="待审核" />
+        <a-badge v-else-if="orderInfo.status === 2" status="error" text="待收货" />
+        <a-badge v-else-if="orderInfo.status === 4" status="error" text="待收货确认" />
+        <a-badge v-else-if="orderInfo.status === 5" status="success" text="已收货" />
       </a-descriptions-item>
       <a-descriptions-item label="订单时间">
-        {{orderForm.order_time}}
+        {{ moment(orderInfo.in_ts * 1000).format('YYYY-MM-DD HH:mm:ss')}}
       </a-descriptions-item>
     </a-descriptions>
   </div>
@@ -19,10 +19,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
+  data () {
+    return {
+      moment
+    }
+  },
   computed: {
     ...mapGetters({
-      orderForm: 'input/orderForm'
+      orderInfo: 'order/orderInfo'
     })
   }
 }
@@ -32,11 +38,5 @@ export default {
 .detail-item {
   margin: 10px;
   background-color: #fff;
-  /deep/ .ant-descriptions-row > td {
-    padding-bottom: 5px;
-  }
-  /deep/ .ant-descriptions-row > th {
-    padding-bottom: 5px;
-  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="detail-item">
-    <a-descriptions title="" :column="4">
+    <a-descriptions title="任务单信息" :column="4">
       <a-descriptions-item label="入库任务单号">
         {{order_info.order_no}}
       </a-descriptions-item>
@@ -32,11 +32,11 @@ export default {
 .detail-item {
   margin: 10px;
   background-color: #fff;
-  /deep/ .ant-descriptions-row > td {
-    padding-bottom: 5px;
-  }
-  /deep/ .ant-descriptions-row > th {
-    padding-bottom: 5px;
-  }
+  // /deep/ .ant-descriptions-row > td {
+  //   padding-bottom: 5px;
+  // }
+  // /deep/ .ant-descriptions-row > th {
+  //   padding-bottom: 5px;
+  // }
 }
 </style>

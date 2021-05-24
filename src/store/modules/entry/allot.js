@@ -51,11 +51,44 @@ const drug_info = {
   box_count: 5,
   apply_cells: ['BJ01010010101', 'BJ01010010102', 'BJ01010010103', 'BJ01010010104', 'BJ01010010105']
 }
+const pack_list = [
+  {
+    pack_id: '001',
+    line_name: '一号流水线',
+    operator_ids: ['1000', '1001', '1002'],
+    operator_names: ['zzz', 'yyy', 'hhh']
+  }
+]
+const up_list = [
+  {
+    up_id: '001',
+    line_name: '一号流水线',
+    operator_ids: ['1000'],
+    operator_names: ['zzz']
+  }
+]
+const getEmpList = () => {
+  let list = []
+  for (let i = 0; i < 10; i++) {
+    const item = {
+      key: i + '',
+      title: 'code' + i,
+      emp_name: 'name' + i,
+      role: '业务员'
+    }
+    list.push(item)
+  }
+  return list
+}
+
 const initialState = {
   pack_up_list,
   drug_info,
   order_info,
-  project_info
+  project_info,
+  pack_list,
+  up_list,
+  emp_list: getEmpList()
 }
 
 const state = () => ({
@@ -72,6 +105,15 @@ const getters = {
   },
   order_info: (state) => {
     return state.order_info
+  },
+  pack_list: (state) => {
+    return state.pack_list
+  },
+  up_list: (state) => {
+    return state.up_list
+  },
+  emp_list: (state) => {
+    return state.emp_list
   }
 }
 
@@ -79,6 +121,8 @@ const getters = {
 const mutations = {
   resetAllData (state) {
     state = Object.assign(state, initialState)
+  },
+  resetFetching (state) {
   }
 }
 

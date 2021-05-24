@@ -2,7 +2,7 @@
   <div>
     <div class="project-drug-search">
       <a-form-model layout="inline" :model="searchForm" ref="searchFormRef"
-        class="search-form" :label-col="{ span: 10 }"
+        class="search-form" :label-col="{ span: 6 }"
         :wrapper-col="{ span: 14 }">
         <a-row class="searchRow">
           <a-col :span="6">
@@ -52,7 +52,7 @@
                 <span>设置</span>
               </template>
               <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+                @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
@@ -60,7 +60,7 @@
       <a-table :columns="tableColumns" :data-source="projectDrugList"
         class="table-one" :rowKey="record => record.drug_proj_id"
         :loading="isfetchProjectDrugList" :pagination="false"
-        :scroll="{x:2100}">
+        :scroll="{x:1900}">
         <template slot="action" slot-scope="record">
           <a-button type="link" size="small" @click="showEditModal(record)">
             编辑
@@ -82,50 +82,24 @@
       <a-form-model ref="projectDrugFormRef" :model="projectDrugForm"
         :rules="projectDrugFormRules" :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }">
-        <a-row>
-          <!-- <a-col :span="12">
-            <a-form-model-item label="药品编号" prop="drug_code" ref="drug_code">
-              <a-auto-complete v-model="projectDrugForm.drug_code"
-                placeholder="请输入" @select="onDrugSelect"
-                @search="onDrugSearch" @change="onDrugChange">
-                <template slot="dataSource">
-                  <a-select-option v-for="item in dataSource"
-                    :key="item.drug_id" :value="item.drug_id">
-                    {{item.drug_code}}
-                  </a-select-option>
-                </template>
-              </a-auto-complete>
-            </a-form-model-item>
-          </a-col> -->
-          <a-col :span="12">
-            <a-form-model-item label="药品名称" prop="drug_name" ref="drug_name">
-              <!-- <a-input v-model="projectDrugForm.drug_name" placeholder="请输入"
-                @blur="
+        <a-form-model-item label="药品名称" prop="drug_name" ref="drug_name"
+          :label-col="{ span: 4 }" :wrapper-col="{ span: 12 }">
+          <!-- <a-input v-model="projectDrugForm.drug_name" placeholder="请输入" @blur="
           () => {
             $refs.drug_name.onFieldBlur()
           }" /> -->
-              <a-auto-complete v-model="projectDrugForm.drug_name"
-                placeholder="请输入" @select="onDrugSelect" @search="onDrugSearch"
-                :data-source="dataSource">
-                <!-- <template slot="dataSource">
-                  <a-select-option v-for="(item,index) in dataSource"
-                    :key="index" :value="item.drug_id">
-                    {{item.drug_name}}
-                  </a-select-option>
-                </template> -->
-              </a-auto-complete>
-            </a-form-model-item>
-          </a-col>
-        </a-row>
+          <a-auto-complete v-model="projectDrugForm.drug_name" placeholder="请输入"
+            @select="onDrugSelect" @search="onDrugSearch"
+            :data-source="dataSource">
+          </a-auto-complete>
+        </a-form-model-item>
         <a-row>
           <a-col :span="12">
-            <a-form-model-item label="药品规格" prop="drug_specification"
-              ref="drug_specification">
-              <a-input v-model="projectDrugForm.drug_specification"
-                placeholder="请输入" @blur="
+            <a-form-model-item label="药品规格" prop="spec" ref="spec">
+              <a-input v-model="projectDrugForm.spec" placeholder="请输入" @blur="
           () => {
-            $refs.drug_specification.onFieldBlur()
-          }" />
+            $refs.spec.onFieldBlur()
+          }" disabled />
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
@@ -134,7 +108,7 @@
                 @blur="
           () => {
             $refs.exp_time.onFieldBlur()
-          }" />
+          }" disabled />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -146,72 +120,68 @@
                 placeholder="请输入" @blur="
           () => {
             $refs.warning_days.onFieldBlur()
-          }" />
+          }" disabled />
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
-            <a-form-model-item label="包装单位" prop="drug_packing"
-              ref="drug_packing">
-              <a-input v-model="projectDrugForm.drug_packing" placeholder="请输入"
+            <a-form-model-item label="包装单位" prop="pck_unit" ref="pck_unit">
+              <a-input v-model="projectDrugForm.pck_unit" placeholder="请输入"
                 @blur="
           () => {
-            $refs.drug_packing.onFieldBlur()
-          }" />
+            $refs.pck_unit.onFieldBlur()
+          }" disabled />
             </a-form-model-item>
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12">
-            <a-form-model-item label="包装长(cm)" prop="packing_len"
-              ref="packing_len">
-              <a-input-number v-model="projectDrugForm.packing_len"
+            <a-form-model-item label="包装长(cm)" prop="pck_len" ref="pck_len">
+              <a-input-number v-model="projectDrugForm.pck_len"
                 placeholder="请输入" @blur="
           () => {
-            $refs.packing_len.onFieldBlur()
-          }" />
+            $refs.pck_len.onFieldBlur()
+          }" disabled />
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
-            <a-form-model-item label="包装宽(cm)" prop="packing_wide"
-              ref="packing_wide">
-              <a-input-number v-model="projectDrugForm.packing_wide"
+            <a-form-model-item label="包装宽(cm)" prop="pck_width" ref="pck_width">
+              <a-input-number v-model="projectDrugForm.pck_width"
                 placeholder="请输入" @blur="
           () => {
-            $refs.packing_wide.onFieldBlur()
-          }" />
-            </a-form-model-item>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col :span="12">
-            <a-form-model-item label="包装高(cm)" prop="packing_height"
-              ref="packing_height">
-              <a-input-number v-model="projectDrugForm.packing_height"
-                placeholder="请输入" @blur="
-          () => {
-            $refs.packing_height.onFieldBlur()
-          }" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-model-item label="最小包装数量" prop="min_packing_num"
-              ref="min_packing_num">
-              <a-input-number v-model="projectDrugForm.min_packing_num"
-                placeholder="请输入" @blur="
-          () => {
-            $refs.min_packing_num.onFieldBlur()
-          }" />
+            $refs.pck_width.onFieldBlur()
+          }" disabled />
             </a-form-model-item>
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12">
-            <a-form-model-item label="存储条件" prop="drug_save" ref="drug_save">
-              <a-input v-model="projectDrugForm.drug_save" placeholder="请输入"
-                @blur="
+            <a-form-model-item label="包装高(cm)" prop="pck_height"
+              ref="pck_height">
+              <a-input-number v-model="projectDrugForm.pck_height"
+                placeholder="请输入" @blur="
           () => {
-            $refs.drug_save.onFieldBlur()
-          }" />
+            $refs.pck_height.onFieldBlur()
+          }" disabled />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="最小包装数量" prop="min_pck_cnt"
+              ref="min_pck_cnt">
+              <a-input-number v-model="projectDrugForm.min_pck_cnt"
+                placeholder="请输入" @blur="
+          () => {
+            $refs.min_pck_cnt.onFieldBlur()
+          }" disabled />
+            </a-form-model-item>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12">
+            <a-form-model-item label="存储条件" prop="env" ref="env">
+              <a-input v-model="projectDrugForm.env" placeholder="请输入" @blur="
+          () => {
+            $refs.env.onFieldBlur()
+          }" disabled />
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
@@ -220,22 +190,14 @@
                 @blur="
           () => {
             $refs.temp_range.onFieldBlur()
-          }" />
+          }" disabled />
             </a-form-model-item>
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12">
-            <a-form-model-item label="作业模式" prop="oper_type">
-              <!-- <a-select v-model="projectDrugForm.oper_type" placeholder="请选择">
-                <a-select-option :value=0>
-                  编盲药
-                </a-select-option>
-                <a-select-option :value=1>
-                  非编盲药
-                </a-select-option>
-              </a-select> -->
-              <a-radio-group v-model="projectDrugForm.oper_type">
+            <a-form-model-item label="是否编盲" prop="op_type">
+              <a-radio-group v-model="projectDrugForm.op_type" disabled>
                 <a-radio-button :value=0>
                   编盲药
                 </a-radio-button>
@@ -247,7 +209,7 @@
           </a-col>
           <a-col :span="12">
             <a-form-model-item label="是否有效" prop="validate">
-              <a-switch v-model="projectDrugForm.validate" />
+              <a-switch v-model="projectDrugForm.validate" disabled />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -260,25 +222,23 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import debounce from '@/js/debounce.js'
 import { addProjectDrug, editProjectDrug, deleteProjectDrug, getDrugInfo } from '@/api/wms.js'
-
 import columnSelect from '@/components/columnSelect.vue'
 const projectDrugForm = {
   drug_proj_id: '',
   drug_id: '',
-  // drug_code: '',
   drug_name: '',
   proj_id: '',
-  drug_specification: '',
+  spec: '',
   exp_time: '',
-  warning_days: 0,
-  drug_packing: '',
-  min_packing_num: 0,
-  packing_len: 0,
-  packing_wide: 0,
-  packing_height: 0,
-  drug_save: '',
+  warning_days: null,
+  pck_unit: '',
+  min_pck_cnt: null,
+  pck_len: null,
+  pck_width: null,
+  pck_height: null,
+  env: '',
   temp_range: '',
-  oper_type: 0,
+  op_type: 0,
   validate: true
 }
 const searchForm = {
@@ -287,33 +247,24 @@ const searchForm = {
   client_name: '',
   proj_id: '',
   proj_name: '',
-  // drug_code: '',
   drug_name: ''
 }
 export default {
   data () {
     const columns = [
-      // {
-      //   title: '药品编号',
-      //   dataIndex: 'drug_code',
-      //   value: 'drug_code',
-      //   width: 150,
-      //   fixed: 'left',
-      //   ellipsis: true
-      // },
       {
         title: '药品名称',
         dataIndex: 'drug_name',
         value: 'drug_name',
-        width: 150,
+        // width: 150,
         fixed: 'left',
         ellipsis: true
       },
       {
         title: '药品规格',
-        dataIndex: 'drug_specification',
-        value: 'drug_specification',
-        width: 150,
+        dataIndex: 'spec',
+        value: 'spec',
+        // width: 150,
         ellipsis: true
       },
       {
@@ -332,43 +283,43 @@ export default {
       },
       {
         title: '药品包装(单位)',
-        dataIndex: 'drug_packing',
-        value: 'drug_packing',
-        width: 100,
+        dataIndex: 'pck_unit',
+        value: 'pck_unit',
+        width: 120,
         ellipsis: true
       },
       {
         title: '最小包装单位数量',
-        dataIndex: 'min_packing_num',
-        value: 'min_packing_num',
+        dataIndex: 'min_pck_cnt',
+        value: 'min_pck_cnt',
         width: 150,
         ellipsis: true
       },
       {
         title: '包装长(cm)',
-        dataIndex: 'packing_len',
-        value: 'packing_len',
+        dataIndex: 'pck_len',
+        value: 'pck_len',
         width: 150,
         ellipsis: true
       },
       {
         title: '包装宽(cm)',
-        dataIndex: 'packing_wide',
-        value: 'packing_wide',
+        dataIndex: 'pck_width',
+        value: 'pck_width',
         width: 150,
         ellipsis: true
       },
       {
         title: '包装高(cm)',
-        dataIndex: 'packing_height',
-        value: 'packing_height',
+        dataIndex: 'pck_height',
+        value: 'pck_height',
         width: 150,
         ellipsis: true
       },
       {
         title: '存储条件',
-        dataIndex: 'drug_save',
-        value: 'drug_save',
+        dataIndex: 'env',
+        value: 'env',
         width: 150,
         ellipsis: true
       },
@@ -380,10 +331,10 @@ export default {
         ellipsis: true
       },
       {
-        title: '作业模式',
-        dataIndex: 'oper_type_name',
-        value: 'oper_type_name',
-        width: 150,
+        title: '是否编盲',
+        dataIndex: 'op_type_desc',
+        value: 'op_type_desc',
+        // width: 100,
         ellipsis: true
       },
       {
@@ -406,19 +357,18 @@ export default {
       confirmLoading: false,
       projectDrugForm: { ...projectDrugForm },
       projectDrugFormRules: {
-        // drug_code: [{ required: true, message: '请输入药品编号', trigger: 'blur' }],
         drug_name: [{ required: true, message: '请输入项目名称', trigger: 'blur' }],
-        drug_specification: [{ required: true, message: '请输入药品规格', trigger: 'blur' }],
+        spec: [{ required: true, message: '请输入药品规格', trigger: 'blur' }],
         exp_time: [{ required: true, message: '请输入有效期', trigger: 'blur' }],
         warning_days: [{ required: true, message: '请输入预警天数', trigger: 'blur' }],
-        drug_packing: [{ required: true, message: '请输入包装单位', trigger: 'blur' }],
-        packing_len: [{ required: true, message: '请输入包装长', trigger: 'blur' }],
-        packing_wide: [{ required: true, message: '请输入包装宽', trigger: 'blur' }],
-        packing_height: [{ required: true, message: '请输入包装高', trigger: 'blur' }],
+        pck_unit: [{ required: true, message: '请输入包装单位', trigger: 'blur' }],
+        pck_len: [{ required: true, message: '请输入包装长', trigger: 'blur' }],
+        pck_width: [{ required: true, message: '请输入包装宽', trigger: 'blur' }],
+        pck_height: [{ required: true, message: '请输入包装高', trigger: 'blur' }],
         temp_range: [{ required: true, message: '请输入温度区间', trigger: 'blur' }],
-        drug_save: [{ required: true, message: '请输入存储条件', trigger: 'blur' }],
-        min_packing_num: [{ required: true, message: '请输入最小包装数量', trigger: 'blur' }],
-        oper_type: [{ required: true, message: '请选择作业模式', trigger: 'blur' }]
+        env: [{ required: true, message: '请输入存储条件', trigger: 'blur' }],
+        min_pck_cnt: [{ required: true, message: '请输入最小包装数量', trigger: 'blur' }],
+        op_type: [{ required: true, message: '请选择作业模式', trigger: 'blur' }]
       },
       isEdit: false
     }
@@ -464,9 +414,8 @@ export default {
     },
     getDrugList (drug_name) {
       const params = {
-        // drug_code: drug_code,
         drug_name: drug_name,
-        op_type: ''
+        op_type: '-1'
       }
       this.fetchDrugList(params)
     },
@@ -491,26 +440,28 @@ export default {
       }
     },
     onDrugSelect (value) {
+      // console.log(value)
+      this.drug = this.drugList.find(item => item.drug_name === value)
       //选中药品编号获取药品信息
       //药品信息填入输入框
-      getDrugInfo({ drug_id: value }).then(res => {
+      getDrugInfo({ drug_id: this.drug.drug_id }).then(res => {
         const drugInfo = res
         const unit = drugInfo.period_unit === 1 ? '天' : drugInfo.period_unit === 2 ? '月' : drugInfo.period_unit === 3 ? '年' : ''
         this.projectDrugForm = Object.assign(this.projectDrugForm, {
           drug_id: drugInfo.drug_id,
           // drug_code: drugInfo.drug_code,
           drug_name: drugInfo.drug_name,
-          drug_specification: drugInfo.spec,
+          spec: drugInfo.spec,
           exp_time: drugInfo.valid_period + unit,
           warning_days: drugInfo.warning_days,
-          drug_packing: drugInfo.pck_unit,
-          min_packing_num: drugInfo.min_pck_cnt,
-          packing_len: drugInfo.pck_len,
-          packing_wide: drugInfo.pck_width,
-          packing_height: drugInfo.pck_height,
-          drug_save: drugInfo.env,
+          pck_unit: drugInfo.pck_unit,
+          min_pck_cnt: drugInfo.min_pck_cnt,
+          pck_len: drugInfo.pck_len,
+          pck_width: drugInfo.pck_width,
+          pck_height: drugInfo.pck_height,
+          env: drugInfo.env,
           temp_range: drugInfo.temp_range,
-          oper_type: drugInfo.op_type,
+          op_type: drugInfo.op_type,
           validate: drugInfo.is_disabled === 0 ? true : false
         })
       }).catch(err => {
@@ -538,9 +489,13 @@ export default {
     },
     addProjectDrug () {
       this.confirmLoading = true
-      const params = Object.assign(this.projectDrugForm,
-        { is_disabled: this.projectDrugForm.validate ? 0 : 1 }
-      )
+      // const params = Object.assign(this.projectDrugForm,
+      //   { is_disabled: this.projectDrugForm.validate ? 0 : 1 }
+      // )
+      const params = {
+        drug_id: this.drug.drug_id,
+        proj_id: this.projectInfo.proj_id
+      }
       addProjectDrug(params).then(res => {
         this.$message.success('操作成功')
         this.getProjectDrugList()
@@ -577,8 +532,7 @@ export default {
     },
     editCancel () {
       this.$refs.projectDrugFormRef.resetFields()
-      this.projectDrugForm = Object.assign({}, projectDrugForm)
-      this.projectDrugForm = Object.assign(this.projectDrugForm, {
+      this.projectDrugForm = Object.assign({}, projectDrugForm, {
         proj_id: this.projectInfo.proj_id
       })
       this.isShowEditModal = false
@@ -587,9 +541,9 @@ export default {
     reloadList () {
       this.getProjectDrugList()
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
-    }
+    changeColumns (columns) {
+      this.tableColumns = columns
+    },
   }
 }
 </script>

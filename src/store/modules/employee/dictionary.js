@@ -120,6 +120,8 @@ const mutations = {
     state.isfetchAllDictTree = false
     state.isfetchDictPageList = false
     state.isfetchTicketList = false
+    state.isfetchOperList = false
+    state.isfetchEntryOrdertStatusList = false
   }
 }
 

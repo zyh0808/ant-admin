@@ -1,27 +1,37 @@
-import { getBoxKindPageList, getBoxKindList, getBoxPageList, getBoxKindDrugPageList, getCellBoxPageList, getBoxList } from '@/api/wms.js'
+import { getBoxKindPageList, getBoxKindList, getBoxPageList, getBoxKindDrugPageList, getCellBoxPageList, getBoxList, getBoxOpenLogPageList } from '@/api/wms.js'
 import { Message } from 'ant-design-vue'
 
 const initialBoxKindState = {
   isfetchBoxKindList: false,
-  boxKindList: []
+  boxKindList: [],
+  boxKindTotal: 0
 }
 const initialBoxState = {
   isfetchBoxList: false,
   boxList: [],
+  boxTotal: 0
 }
 const initialBoxKindDrugState = {
   isfetchBoxKindDrugList: false,
   boxKindDrugList: [],
+  boxKindDrugTotal: 0
 }
 const initialCellBoxState = {
   isfetchCellBoxList: false,
   cellBoxList: [],
+  cellBoxTotal: 0
+}
+const initialBoxOpenLoState = {
+  isfetchBoxOpenLogList: false,
+  boxOpenLogList: [],
+  boxOpenLogTotal: 0
 }
 const initialState = {
   ...initialBoxKindState,
   ...initialBoxState,
   ...initialBoxKindDrugState,
-  ...initialCellBoxState
+  ...initialCellBoxState,
+  ...initialBoxOpenLoState
 }
 
 const state = () => ({
@@ -65,6 +75,15 @@ const getters = {
   },
   cellBoxTotal: (state) => {
     return state.cellBoxTotal
+  },
+  isfetchBoxOpenLogList: (state) => {
+    return state.isfetchBoxOpenLogList
+  },
+  boxOpenLogList: (state) => {
+    return state.boxOpenLogList
+  },
+  boxOpenLogTotal: (state) => {
+    return state.boxOpenLogTotal
   }
 }
 
@@ -142,11 +161,27 @@ const mutations = {
   setCellBoxTotal (state, total) {
     state.cellBoxTotal = total
   },
+  startFetchBoxOpenLogList (state) {
+    state.isfetchBoxOpenLogList = true
+  },
+  stopFetchBoxOpenLogList (state) {
+    state.isfetchBoxOpenLogList = false
+  },
+  setBoxOpenLogList (state, list) {
+    state.boxOpenLogList = list
+  },
+  setBoxOpenLogTotal (state, total) {
+    state.boxOpenLogTotal = total
+  },
   resetAllData (state) {
     state = Object.assign(state, initialState)
   },
   resetFetching (state) {
     state.isfetchBoxKindList = false
+    state.isfetchBoxList = false
+    state.isfetchBoxKindDrugList = false
+    state.isfetchCellBoxList = false
+    state.isfetchBoxOpenLogList = false
   }
 }
 
@@ -261,6 +296,33 @@ const actions = {
     }).catch(err => {
       commit('setCellBoxList', [])
       commit('stopFetchCellBoxList')
+      Message.error(err.msg)
+    })
+  },
+  fetchBoxOpenLogPageList ({ state, commit }, params) {
+    if (state.isfetchBoxOpenLogList) return
+    commit('startFetchBoxOpenLogList')
+    const data = {
+      house_id: params.house_id,
+      box_barcode: params.box_barcode,
+      op_date: params.op_date,
+      op_code: params.op_code,
+      op_username: params.op_username,
+      op_time_start: params.op_time_start,
+      op_time_end: params.op_time_end,
+      page_num: params.page_num,
+      page_size: params.page_size
+    }
+    getBoxOpenLogPageList(data).then(res => {
+      commit('setBoxOpenLogList', res.rows)
+      commit('setBoxOpenLogTotal', res.total)
+      if (params.success) {
+        params.success()
+      }
+      commit('stopFetchBoxOpenLogList')
+    }).catch(err => {
+      commit('setBoxOpenLogList', [])
+      commit('stopFetchBoxOpenLogList')
       Message.error(err.msg)
     })
   }

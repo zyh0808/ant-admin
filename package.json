@@ -1,5 +1,5 @@
 {
-  "name": "ant-admin",
+  "name": "medicine-system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
+    "mockjs": "^1.1.0",
     "vue": "^2.6.11",
     "vue-draggable-resizable": "^2.3.0",
     "vue-infinite-scroll": "^2.0.2",

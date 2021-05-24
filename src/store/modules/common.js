@@ -22,6 +22,8 @@ const mutations = {
   resetAllData (state) {
     state = Object.assign(state, initialState)
   },
+  resetFetching (state) {
+  }
 }
 
 // actions

@@ -1,6 +1,6 @@
 <template>
   <div class="detail-item">
-    <a-descriptions title="" :column="4">
+    <a-descriptions title="审核信息" :column="4">
       <a-descriptions-item label="审核结果">
         {{checkForm.check_result}}
       </a-descriptions-item>
@@ -14,8 +14,8 @@
         {{checkForm.check_time}}
       </a-descriptions-item>
       <a-descriptions-item label="预约货位" :span="4">
-        <span v-for="(cell,index) in checkForm.apply_cells" :key="index"
-          class="apply-cell">{{cell}}</span>
+        <a-tag v-for="(cell,index) in checkForm.apply_cells" :key="index"
+          color="green">{{cell}}</a-tag>
       </a-descriptions-item>
     </a-descriptions>
   </div>
@@ -44,12 +44,12 @@ export default {
 .detail-item {
   margin: 10px;
   background-color: #fff;
-  /deep/ .ant-descriptions-row > td {
-    padding-bottom: 5px;
-  }
-  /deep/ .ant-descriptions-row > th {
-    padding-bottom: 5px;
-  }
+  // /deep/ .ant-descriptions-row > td {
+  //   padding-bottom: 5px;
+  // }
+  // /deep/ .ant-descriptions-row > th {
+  //   padding-bottom: 5px;
+  // }
   .apply-cell {
     margin-right: 10px;
     color: #69c0ff;

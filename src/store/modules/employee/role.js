@@ -1,4 +1,4 @@
-import { getPageRoleList, getPageRoleEmpList } from '@/api/system.js'
+import { getPageRoleList, getRoleEmpList, getRoleList } from '@/api/system.js'
 import { Message } from 'ant-design-vue'
 const initialState = {
   isfetchRoleList: false,
@@ -70,7 +70,7 @@ const mutations = {
 
 // actions
 const actions = {
-  fetchRoleList ({ state, commit }, params) {
+  fetchRolePageList ({ state, commit }, params) {
     if (state.isfetchRoleList) return
     commit('startFetchRoleList')
     const data = {
@@ -92,10 +92,22 @@ const actions = {
       Message.error(err.msg)
     })
   },
+  fetchRoleList ({ state, commit }, params) {
+    if (state.isfetchRoleList) return
+    commit('startFetchRoleList')
+    getRoleList(params).then(res => {
+      commit('setRoleList', res)
+      commit('stopFetchRoleList')
+    }).catch(err => {
+      commit('setRoleList', [])
+      commit('stopFetchRoleList')
+      Message.error(err.msg)
+    })
+  },
   fetchRoleEmpList ({ state, commit }, params) {
     if (state.isfetchRoleEmpList) return
     commit('startFetchRoleEmpList')
-    getPageRoleEmpList(params).then(res => {
+    getRoleEmpList(params).then(res => {
       commit('setRoleEmpList', res)
       commit('stopFetchRoleEmpList')
     }).catch(err => {

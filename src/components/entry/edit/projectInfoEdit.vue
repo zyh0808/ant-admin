@@ -1,24 +1,16 @@
 <template>
   <div class="detail-item">
-    <!-- <a-page-header title="项目信息" /> -->
-    <a-form-model :model="projectForm" ref="projectFormRef" class="form-content"
-      :rules="projectFormRules" :label-col="{ span: 8 }"
-      :wrapper-col="{ span: 16 }">
+    <a-form-model :model="projectForm" ref="projectFormRef" class="form-content" :rules="projectFormRules" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
       <a-form-model-item label="申办方编码" prop="client_code">
-        <a-auto-complete v-model="client_code" placeholder="请输入"
-          :data-source="clientList" @search="getClientList"
-          @select="handleClientSelect">
+        <a-auto-complete v-model="client_code" placeholder="请输入" :data-source="clientList" @search="getClientList" @select="handleClientSelect">
         </a-auto-complete>
       </a-form-model-item>
-      <a-form-model-item label="申办方名称" :label-col="{ span: 8 }"
-        :wrapper-col="{ span: 16 }">
+      <a-form-model-item label="申办方名称" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
         <a-input v-model="projectForm.client_name" placeholder="请输入" disabled>
         </a-input>
       </a-form-model-item>
       <a-form-model-item label="项目号" prop="proj_no">
-        <a-auto-complete v-model="proj_no" placeholder="请输入"
-          :data-source="projectList" @search="getProjectList"
-          @select="handleProjectSelect">
+        <a-auto-complete v-model="proj_no" placeholder="请输入" :data-source="projectList" @search="getProjectList" @select="handleProjectSelect">
         </a-auto-complete>
       </a-form-model-item>
       <a-form-model-item label="项目名称">
@@ -34,28 +26,9 @@
         </a-input>
       </a-form-model-item>
       <a-form-model-item label="付费账号">
-        <a-input v-model="projectForm.paid_account_id" placeholder="请输入"
-          disabled>
+        <a-input v-model="projectForm.paid_account_id" placeholder="请输入" disabled>
         </a-input>
       </a-form-model-item>
-      <!-- <a-row>
-        <a-col :span="12">
-        </a-col>
-        <a-col :span="12">
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="12">
-        </a-col>
-        <a-col :span="12">
-        </a-col>
-        <a-col :span="12">
-        </a-col>
-        <a-col :span="12">
-        </a-col>
-        <a-col :span="12">
-        </a-col>
-      </a-row> -->
     </a-form-model>
   </div>
 </template>
@@ -65,12 +38,6 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 // import { ENTRY_PAGE_TYPE } from '@/js/global.js'
 
 export default {
-  props: {
-    mode: {
-      type: String,
-      default: 'input'
-    }
-  },
   data () {
     return {
       projectFormRules: {

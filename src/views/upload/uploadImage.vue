@@ -3,8 +3,7 @@
     <!-- :customRequest="uploadImage" -->
     <!-- action="https://www.mocky.io/v2/5cc8019d300000980a055e76" -->
     <!-- @change="handleChange" -->
-    <a-upload :customRequest="uploadImage" list-type="picture-card"
-      :file-list="fileList" @preview="handlePreview" name="image" multiple>
+    <a-upload :customRequest="uploadImage" list-type="picture-card" :file-list="fileList" @preview="handlePreview" name="image" multiple>
       <div v-if="fileList.length < 4">
         <a-icon type="plus" />
         <div class="ant-upload-text">

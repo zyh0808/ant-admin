@@ -198,7 +198,7 @@
     };
     view.Blob.prototype = getPrototypeOf(new view.Blob());
 }(
-    typeof self !== "undefined" && self ||
-    typeof window !== "undefined" && window ||
+    typeof self !== "null" && self ||
+    typeof window !== "null" && window ||
     this
 ));

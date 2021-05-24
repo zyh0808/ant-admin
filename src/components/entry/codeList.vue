@@ -1,61 +1,70 @@
 <template>
-  <a-list>
-    <RecycleScroller v-infinite-scroll="appendMore" class="code-list"
-      :items="codeList" :item-size="40" key-field="code"
-      :infinite-scroll-disabled="busy" :infinite-scroll-distance="20">
-      <a-list-item slot-scope="{item}">
-        {{item.code}}
-      </a-list-item>
-    </RecycleScroller>
-    <div v-if="loading && !busy" class="loading-container">
-      <a-spin />
+  <a-drawer title="药品条形码" width="250" :visible="showDrawer" @close="closeDrug" class="code-drawer">
+    <a-list>
+      <RecycleScroller v-infinite-scroll="appendMore" class="code-list" :items="codeList" :item-size="40" key-field="drug_code" :infinite-scroll-disabled="busy" :infinite-scroll-distance="20">
+        <a-list-item slot-scope="{item}">
+          {{item.drug_code}}
+        </a-list-item>
+      </RecycleScroller>
+      <div v-if="loading && !busy" class="loading-container">
+        <a-spin />
+      </div>
+    </a-list>
+    <div :style="{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          borderTop: '1px solid #e9e9e9',
+          padding: '10px 16px',
+          background: '#fff',
+          textAlign: 'right',
+          zIndex: 1,
+        }">
+      <a-button :style="{ marginRight: '8px' }" @click="closeDrug">
+        关闭
+      </a-button>
     </div>
-  </a-list>
+  </a-drawer>
 </template>
 
 <script>
 import infiniteScroll from 'vue-infinite-scroll'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-import { PrefixInteger } from '@/js/utils.js'
-function getCodeList (num, startIndex) {
-  let list = []
-  for (let i = startIndex; i < startIndex + num; i++) {
-    const fixedNum = PrefixInteger(i, 5)
-    const code = `code${fixedNum}`
-    list.push({ key: i + '', code })
-  }
-  return list
-}
-const codeList = getCodeList(10000, 0)
-// console.log(codeList)
+import { mapGetters } from 'vuex'
 export default {
   directives: { infiniteScroll },
   components: {
     RecycleScroller
   },
-  props: {
-    codeType: {
-      type: String,
-      default: 'drug'
-    }
-  },
   data () {
     return {
-      codeList,
       loading: false,
-      busy: false
+      busy: false,
+      showDrawer: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      codeList: 'order/codeList'
+    })
   },
   methods: {
     appendMore: function () {
-      this.loading = true
-      this.busy = true
-      setTimeout(() => {
-        const list = getCodeList(20, this.codeList.length)
-        this.codeList.concat(list)
-        this.loading = false
-      }, 500);
+      // this.loading = true
+      // this.busy = true
+      // setTimeout(() => {
+      //   const list = getCodeList(20, this.codeList.length)
+      //   this.codeList.concat(list)
+      //   this.loading = false
+      // }, 500);
+    },
+    showDrugDrawer () {
+      this.showDrawer = true
+    },
+    closeDrug () {
+      this.showDrawer = false
     }
   }
 }

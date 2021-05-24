@@ -3,7 +3,7 @@
     <a-layout-header style="height:48px;lineHeight:48px">
       <a-row type="flex">
         <div class="logo-box">
-          <!-- <img class="logo" src="../assets/main/logo.png" alt="logo" /> -->
+          <img class="logo" src="../assets/main/logo.png" alt="logo" />
         </div>
         <head-menu class="head-menu" />
         <a-dropdown class="avaterName">

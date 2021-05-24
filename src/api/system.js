@@ -2,7 +2,7 @@ import { service } from '@/js/request'
 
 // let API = 'http://192.168.0.103:16800'
 let API = ''
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "test") {
   API = 'http://123.57.86.56:16800'
   // API = 'http://60.205.139.20:16800'
 }
@@ -191,7 +191,7 @@ export function getPageRoleList (data) {
   })
 }
 
-export function getPageRoleEmpList (data) {
+export function getRoleEmpList (data) {
   return service({
     url: API + '/api/pub/user_role/list',
     method: 'post',
@@ -642,6 +642,14 @@ export function getOrgUserList (data) {
 export function getAllAuthTree (data) {
   return service({
     url: API + '/api/pub/authdict/tree',
+    method: 'post',
+    data
+  })
+}
+
+export function getRoleList (data) {
+  return service({
+    url: API + '/api/pub/role/list',
     method: 'post',
     data
   })

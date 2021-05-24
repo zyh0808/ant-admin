@@ -26,8 +26,11 @@ service.interceptors.request.use(
     let timestamp = ((new Date()).getTime() / 1000).toFixed()
     let nonce = randomString(16)
     let sign = SHA256(timestamp + token + nonce + timestamp)
-
-    config.headers['Content-Type'] = 'application/json;charset=utf-8'
+    if (config.url === '/api/piw/hr_drug_import/import') {
+      config.headers['Content-Type'] = 'multipart/form-data;charset=utf-8'
+    } else {
+      config.headers['Content-Type'] = 'application/json;charset=utf-8'
+    }
     config.headers['x-ce-appid'] = 'CE16801'
     if (user_id) {
       config.headers['x-ce-userid'] = user_id
@@ -48,6 +51,7 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
+    // console.log(response)
     const res = response.data
     //对接口返回结果判断
     if (res && res.code !== 10000) {

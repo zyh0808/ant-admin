@@ -1,7 +1,6 @@
 <template>
   <div class="task-order-search-form">
-    <a-form-model :model="searchForm" ref="searchFormRef" class="form-content"
-      :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+    <a-form-model :model="searchForm" ref="searchFormRef" class="form-content" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
       <a-row>
         <a-col :span="6">
           <a-form-model-item label="入库任务单号">
@@ -28,29 +27,27 @@
           </a-form-model-item>
         </a-col>
         <a-col :span="12" v-if="showMore">
-          <a-form-model-item label="任务单时间" :label-col="{ span: 4 }"
-            :wrapper-col="{ span: 16 }">
-            <a-range-picker v-model="searchForm.task_order_time"
-              :format="dateFormat" />
+          <a-form-model-item label="任务单时间" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }">
+            <a-range-picker v-model="searchForm.task_order_time" :format="dateFormat" />
           </a-form-model-item>
         </a-col>
         <a-col :span="6" :offset="showMore? '6': '0'">
-          <a-row type="flex" justify="end" style="marginTop:4px">
-            <a-button type="primary" @click="handleSearch">
-              查询
-            </a-button>
-            <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
-              重置
-            </a-button>
-            <a-button type="link" :style="{ marginLeft: '8px' }"
-              v-if="!showMore" @click="showMore = true">
-              更多
-            </a-button>
-            <a-button type="link" :style="{ marginLeft: '8px' }" v-else
-              @click="showMore = false">
-              收起
-            </a-button>
-          </a-row>
+          <a-form-model-item :label-col="{ span: 0 }" :wrapper-col="{ span: 24 }">
+            <div class="search-btns">
+              <a-button type="primary" @click="handleSearch">
+                查询
+              </a-button>
+              <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
+                重置
+              </a-button>
+              <a-button type="link" :style="{ marginLeft: '8px' }" v-if="!showMore" @click="showMore = true">
+                更多
+              </a-button>
+              <a-button type="link" :style="{ marginLeft: '8px' }" v-else @click="showMore = false">
+                收起
+              </a-button>
+            </div>
+          </a-form-model-item>
         </a-col>
       </a-row>
     </a-form-model>

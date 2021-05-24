@@ -161,6 +161,7 @@ const mutations = {
     state.isfetchSelectUserAuth = false
     state.isfetchUnselectRoleAuth = false
     state.isfetchSelectRoleAuth = false
+    state.isfetchAllAuth = false
     state.isfetchAuthPageList = false
   }
 }

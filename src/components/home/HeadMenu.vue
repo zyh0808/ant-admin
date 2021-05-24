@@ -1,6 +1,6 @@
 <template>
-  <a-menu :default-selected-keys="['001']" theme="dark" mode="horizontal"
-    @click="moduleHandle">
+  <a-menu :default-selected-keys="currentModule" :value="currentModule"
+    theme="dark" mode="horizontal" @click="moduleHandle">
     <template v-for="item in moduleList">
       <a-menu-item :key="item.id">
         {{item.name}}

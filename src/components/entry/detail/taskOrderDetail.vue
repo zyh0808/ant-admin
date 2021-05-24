@@ -5,8 +5,7 @@
         {{taskOrderInfo.order_no}}
       </a-descriptions-item>
       <a-descriptions-item label="任务单状态">
-        <a-badge v-if="taskOrderInfo.order_status === '待确认'" status="error"
-          text="待确认" />
+        <a-badge v-if="taskOrderInfo.order_status === '待确认'" status="error" text="待确认" />
         <a-badge v-else status="success" text="已确认" />
       </a-descriptions-item>
       <a-descriptions-item label="任务单时间">
@@ -46,15 +45,13 @@
         {{taskOrderInfo.drug_pack}}
       </a-descriptions-item>
       <a-descriptions-item label="原药品数量">
-        <span class="info-text click-able"
-          @click="showDrug('detail')">{{taskOrderInfo.drug_count}}</span>
+        <span class="info-text click-able" @click="showDrug('detail')">{{taskOrderInfo.drug_count}}</span>
       </a-descriptions-item>
       <a-descriptions-item label="收货数量">
-        <span class="info-text click-able"
-          @click="showDrug('receive')">{{taskOrderInfo.receiveCount}}</span>
+        <span class="info-text click-able" @click="showDrug('receive')">{{taskOrderInfo.receiveCount}}</span>
       </a-descriptions-item>
     </a-descriptions>
-
+    <a-divider />
     <a-descriptions title="确认收货信息" :column="2" class="confirm-info">
       <a-descriptions-item label="确认后数量">
         <span class="important-text">{{taskOrderInfo.confirmCount}}</span>

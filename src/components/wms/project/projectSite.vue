@@ -1,20 +1,16 @@
 <template>
   <div>
     <div class="project-site-search">
-      <a-form-model layout="inline" :model="searchForm" ref="searchFormRef"
-        class="search-form" :label-col="{ span: 10 }"
-        :wrapper-col="{ span: 14 }">
+      <a-form-model layout="inline" :model="searchForm" ref="searchFormRef" class="search-form" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }">
         <a-row class="searchRow">
           <a-col :span="6">
             <a-form-model-item label="实验中心编号">
-              <a-input v-model="searchForm.site_code" placeholder="请输入"
-                allowClear />
+              <a-input v-model="searchForm.site_code" placeholder="请输入" allowClear />
             </a-form-model-item>
           </a-col>
           <a-col :span="6">
             <a-form-model-item label="实验中心名称">
-              <a-input v-model="searchForm.site_name" placeholder="请输入"
-                allowClear />
+              <a-input v-model="searchForm.site_name" placeholder="请输入" allowClear />
             </a-form-model-item>
           </a-col>
           <a-col :span="6" :offset="6">
@@ -38,8 +34,7 @@
               <template slot="title">
                 <span>新建</span>
               </template>
-              <a-button type="primary" icon="plus-circle"
-                @click="showEditModal()" />
+              <a-button type="primary" icon="plus-circle" @click="showEditModal()" />
             </a-tooltip>
             <a-tooltip placement="top">
               <template slot="title">
@@ -51,15 +46,12 @@
               <template slot="title">
                 <span>设置</span>
               </template>
-              <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+              <columnSelect :plainOptions="columns" @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
       </a-row>
-      <a-table :columns="tableColumns" :data-source="projectSiteList"
-        class="table-one" :rowKey="record => record.proj_site_id"
-        :loading="isfetchProjectSiteList" :pagination="false">
+      <a-table :columns="tableColumns" :data-source="projectSiteList" class="table-one" :rowKey="record => record.proj_site_id" :loading="isfetchProjectSiteList" :pagination="false">
         <span slot="validate" slot-scope="validate">
           <a-switch :checked="validate" disabled />
         </span>
@@ -68,9 +60,7 @@
             编辑
           </a-button>
           <a-divider type="vertical" />
-          <a-popconfirm v-if="projectSiteList.length" title="确认删除吗?"
-            cancelText="取消" okText="确认"
-            @confirm="() => deleteProjectSite(record.proj_site_id)">
+          <a-popconfirm v-if="projectSiteList.length" title="确认删除吗?" cancelText="取消" okText="确认" @confirm="() => deleteProjectSite(record.proj_site_id)">
             <a-button type="link" size="small">
               删除
             </a-button>
@@ -78,21 +68,14 @@
         </template>
       </a-table>
     </div>
-    <a-modal :title="title" :visible="isShowEditModal"
-      :confirm-loading="confirmLoading" @ok="editOk" @cancel="editCancel"
-      cancelText="取消" okText="确定" :width="800">
-      <a-form-model ref="projectSiteFormRef" :model="projectSiteForm"
-        :rules="projectSiteFormRules" :label-col="{ span: 8 }"
-        :wrapper-col="{ span: 16 }">
+    <a-modal :title="title" :visible="isShowEditModal" :confirm-loading="confirmLoading" @ok="editOk" @cancel="editCancel" cancelText="取消" okText="确定" :width="800">
+      <a-form-model ref="projectSiteFormRef" :model="projectSiteForm" :rules="projectSiteFormRules" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
         <a-row>
           <a-col :span="12">
             <a-form-model-item label="实验中心编码" prop="site_id">
-              <a-auto-complete v-model="projectSiteForm.site_code"
-                placeholder="请输入" @select="onSiteSelect" @search="onSiteSearch"
-                @change="onSiteChange">
+              <a-auto-complete v-model="projectSiteForm.site_code" placeholder="请输入" @select="onSiteSelect" @search="onSiteSearch" @change="onSiteChange">
                 <template slot="dataSource">
-                  <a-select-option v-for="item in dataSource"
-                    :key="item.site_id" :value="item.site_id">
+                  <a-select-option v-for="item in dataSource" :key="item.site_id" :value="item.site_id">
                     {{item.site_code}}
                   </a-select-option>
                 </template>
@@ -340,9 +323,9 @@ export default {
     reloadList () {
       this.getProjectSiteList()
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
-    }
+    changeColumns (columns) {
+      this.tableColumns = columns
+    },
   }
 }
 </script>

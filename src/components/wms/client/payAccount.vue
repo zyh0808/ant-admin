@@ -2,12 +2,12 @@
   <div>
     <div class="payaccount-search">
       <a-form-model layout="inline" :model="searchForm" ref="searchFormRef"
-        class="search-form" :label-col="{ span: 10 }"
+        class="search-form" :label-col="{ span: 6 }"
         :wrapper-col="{ span: 14 }">
         <a-row class="searchRow">
           <a-col :span="6">
-            <a-form-model-item label="付费账号">
-              <a-input v-model="searchForm.paid_name" placeholder="请输入付费账号"
+            <a-form-model-item label="付费账号名称">
+              <a-input v-model="searchForm.paid_name" placeholder="请输入付费账号名称"
                 allowClear />
             </a-form-model-item>
           </a-col>
@@ -46,7 +46,7 @@
                 <span>设置</span>
               </template>
               <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+                @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
@@ -231,27 +231,28 @@ export default {
         title: '项目客服',
         dataIndex: 'paid_pm',
         value: 'paid_pm',
-        width: 100,
+        // width: 100,
         ellipsis: true
       },
       {
         title: '业务类型',
         dataIndex: 'oper_type_name',
         value: 'oper_type_name',
-        width: 100,
+        // width: 100,
         ellipsis: true
       },
       {
         title: '发票类型',
         dataIndex: 'invoice_type_name',
         value: 'invoice_type_name',
-        width: 150,
+        // width: 150,
         ellipsis: true
       },
       {
         title: '发票抬头',
         dataIndex: 'invoice_head',
         value: 'invoice_head',
+        width: 250,
         ellipsis: true
       },
       {
@@ -299,7 +300,7 @@ export default {
     })
   },
   created () {
-    this.$refs.payAccountFormRef.resetFields()
+    // this.$refs.payAccountFormRef.resetFields()
     this.searchForm = Object.assign(this.searchForm, { client_id: this.clientInfo.client_id })
     this.payAccountForm = Object.assign(this.payAccountForm, { client_id: this.clientInfo.client_id })
   },
@@ -350,8 +351,8 @@ export default {
       const params = Object.assign(this.payAccountForm,
         {
           is_disabled: this.payAccountForm.validate ? 0 : 1,
-          invoice_type: parseInt(this.clientForm.invoice_type),
-          oper_type: parseInt(this.clientForm.oper_type)
+          invoice_type: parseInt(this.payAccountForm.invoice_type),
+          oper_type: parseInt(this.payAccountForm.oper_type)
         }
       )
       addPayAccount(params).then(res => {
@@ -367,8 +368,8 @@ export default {
       const params = Object.assign(this.payAccountForm,
         {
           is_disabled: this.payAccountForm.validate ? 0 : 1,
-          invoice_type: parseInt(this.clientForm.invoice_type),
-          oper_type: parseInt(this.clientForm.oper_type)
+          invoice_type: parseInt(this.payAccountForm.invoice_type),
+          oper_type: parseInt(this.payAccountForm.oper_type)
         }
       )
       editPayAccount(params).then(res => {
@@ -399,9 +400,9 @@ export default {
     reloadList () {
       this.getPayAccountList()
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
-    }
+    changeColumns (columns) {
+      this.tableColumns = columns
+    },
   }
 }
 </script>

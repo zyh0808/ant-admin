@@ -38,7 +38,7 @@ const mutations = {
   setDrugList (state, list) {
     list = list.map(item => {
       item.validate = item.is_disabled === 0
-      item.op_type_desc = item.op_type === 0 ? '编盲药' : '非编盲药'
+      item.op_type_desc = item.op_type === 0 ? '非编盲药' : '编盲药'
       const unit = item.period_unit === 1 ? '天' : item.period_unit === 2 ? '月' : item.period_unit === 3 ? '年' : ''
       item.validPeriod = item.valid_period + ' ' + unit
       return item
@@ -53,8 +53,10 @@ const mutations = {
   },
   setProjectDrugList (state, list) {
     list = list.map(item => {
+      const unit = item.period_unit === 1 ? '天' : item.period_unit === 2 ? '月' : '年'
       item.validate = item.is_disabled === 0
-      item.oper_type_name = item.oper_type === 0 ? '编盲药' : item.oper_type === 1 ? '非编盲药' : ''
+      item.op_type_desc = item.op_type === 0 ? '非编盲药' : item.op_type === 1 ? '编盲药' : ''
+      item.exp_time = item.valid_period + unit
       return item
     })
     state.projectDrugList = list

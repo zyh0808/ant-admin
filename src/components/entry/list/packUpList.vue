@@ -2,14 +2,6 @@
   <div class="pack-up-list">
     <a-row class="toolRow" type="flex" justify="space-between">
       <div>
-        <a-row type="flex">
-          <!-- <div v-for="item in status" :key="item.index"
-            :class="activeStatus=== item.index? 'status-btn active-btn': 'status-btn'"
-            @click="changeActive(item.index)">
-            <span>{{item.name}}</span>
-            <div class="bg-line"></div>
-          </div> -->
-        </a-row>
       </div>
       <div>
         <a-row class="toolsBtn">
@@ -25,135 +17,168 @@
                 <span>设置</span>
               </template>
               <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+                @changeColumns="changeColumns">
+              </columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
       </div>
     </a-row>
-    <a-table :columns="tableColumns" :data-source="pack_up_list" ref="tableRef"
-      class="table-list" :rowKey="record => record.order_no" :pagination="false"
-      :scroll="{x:1450}">
-      <span slot="pack_status" slot-scope="pack_status">
-        <a-tag v-if="pack_status === '未分配'" color="red">
+    <a-table :columns="tableColumns" :data-source="packUpList" ref="tableRef"
+      class="table-list" :rowKey="record => record.drug_in_detail_id"
+      :loading="isFetchPackUpList" :pagination="pagination" :scroll="{x:1500}"
+      @change="changePage" @showSizeChange="changePageSize">
+      <!-- <a slot="drug_in_detail_id" slot-scope="text, record" @click="showTaskOrderInfo(record)">{{text}}</a> -->
+      <!-- <a slot="receive_cnt" slot-scope="text" @click="showDrug">{{text}}</a> -->
+      <span slot="packing_status" slot-scope="packing_status">
+        <a-tag v-if="packing_status === 0" color="red">
           未分配
         </a-tag>
         <a-tag v-else color="green">
           已分配
         </a-tag>
       </span>
-      <span slot="up_status" slot-scope="up_status">
-        <a-tag v-if="up_status === '未分配'" color="red">
+      <span slot="onshelf_status" slot-scope="onshelf_status">
+        <a-tag v-if="onshelf_status === 0" color="red">
           未分配
         </a-tag>
         <a-tag v-else color="green">
           已分配
         </a-tag>
       </span>
-      <template slot="action">
-        <a-button type="link" size="small" @click="goToAllot">
+      <template slot="action" slot-scope="record">
+        <a-button
+          v-if="record.packing_status === 0 || record.onshelf_status === 0"
+          type="link" size="small" @click="goToAllot(record)">
           分配
+        </a-button>
+        <a-divider type="vertical"
+          v-if="record.packing_status === 0 || record.onshelf_status === 0" />
+        <a-button type="link" size="small"
+          @click="showTaskOrderInfo(record.drug_in_detail_id)">
+          查看详情
         </a-button>
       </template>
     </a-table>
     <a-table :columns="tableColumns" :class="showSticky ? 'sticky-table'  : ''"
       ref="stickyTableRef" :style="{display: 'none',width: stickyWidth + 'px'}"
-      table-layout="fixed" :scroll="{x:1450}">
+      table-layout="fixed" :scroll="{x:1500}">
     </a-table>
+    <a-drawer title=" 装箱上架任务详情" width="500" :visible="isShowTaskOrderInfo"
+      @close="closeTaskOrderInfo">
+      <packUpDetail></packUpDetail>
+      <!-- <div :style="{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          borderTop: '1px solid #e9e9e9',
+          padding: '10px 16px',
+          background: '#fff',
+          textAlign: 'right',
+          zIndex: 1,
+        }">
+        <a-button :style="{ marginRight: '8px' }" @click="closeTaskOrderInfo">
+          关闭
+        </a-button>
+      </div> -->
+    </a-drawer>
+    <codeList ref="codeListRef"></codeList>
   </div>
 </template>
 
 <script>
 import columnSelect from '@/components/columnSelect.vue'
-import { mapGetters } from 'vuex'
+import codeList from '@/components/entry/codeList.vue'
+import packUpDetail from '@/components/entry/detail/packUpDetail'
+import drugInfoDetail from '@/components/entry/detail/drugInfoDetail'
+import { mapActions, mapGetters } from 'vuex'
 export default {
+  props: {
+    pagination: {
+      type: Object,
+      default: () => { }
+    }
+  },
   data () {
     const columns = [
-      {
-        title: '入库任务单号',
-        dataIndex: 'order_no',
-        value: 'order_no',
-        width: 150,
-        ellipsis: true
-      },
-      {
-        title: '订单时间',
-        dataIndex: 'order_time',
-        value: 'order_time',
-        width: 150,
-        ellipsis: true
-      },
-      {
-        title: '装箱分配状态',
-        dataIndex: 'pack_status',
-        value: 'pack_status',
-        width: 100,
-        key: '',
-        scopedSlots: { customRender: 'pack_status' }
-      },
-      {
-        title: '上架分配状态',
-        dataIndex: 'up_status',
-        value: 'up_status',
-        width: 100,
-        key: 'up_status',
-        scopedSlots: { customRender: 'up_status' }
-      },
-      {
-        title: '入库仓库',
-        dataIndex: 'house',
-        value: 'house',
-        width: 150,
-        ellipsis: true
-      },
       {
         title: '药品名称',
         dataIndex: 'drug_name',
         value: 'drug_name',
-        width: 150,
+        // width: 150,
         ellipsis: true
       },
       {
         title: '药品批号',
-        dataIndex: 'drug_batch',
-        value: 'drug_batch',
+        dataIndex: 'batch_no',
+        value: 'batch_no',
         width: 150,
         ellipsis: true
       },
       {
-        title: '药品总数',
-        dataIndex: 'drug_count',
-        value: 'drug_count',
-        width: 100,
+        title: '申办方名称',
+        dataIndex: 'client_name',
+        value: 'client_name',
+        // width: 150,
         ellipsis: true
       },
       {
-        title: '收货数量',
-        dataIndex: 'receiveCount',
-        value: 'receiveCount',
-        width: 100,
+        title: '项目号',
+        dataIndex: 'proj_no',
+        value: 'proj_no',
+        // width: 150,
         ellipsis: true
+      },
+      {
+        title: '入库仓库',
+        dataIndex: 'house_name',
+        value: 'house_name',
+        // width: 150,
+        ellipsis: true
+      },
+      {
+        title: '确认收货数量',
+        dataIndex: 'receive_cnt',
+        value: 'receive_cnt',
+        width: 120,
+        ellipsis: true,
+        scopedSlots: { customRender: 'receive_cnt' }
       },
       {
         title: '预用药品箱',
-        dataIndex: 'box_kind',
-        value: 'box_kind',
-        width: 100,
+        dataIndex: 'box_kind_name',
+        value: 'box_kind_name',
+        // width: 100,
         ellipsis: true
       },
       {
         title: '预用数量',
-        dataIndex: 'box_count',
-        value: 'box_count',
-        width: 100,
+        dataIndex: 'box_cnt',
+        value: 'box_cnt',
+        // width: 100,
         ellipsis: true
+      },
+      {
+        title: '装箱分配状态',
+        dataIndex: 'packing_status',
+        value: 'packing_status',
+        // width: 100,
+        scopedSlots: { customRender: 'packing_status' }
+      },
+      {
+        title: '上架分配状态',
+        dataIndex: 'onshelf_status',
+        value: 'onshelf_status',
+        // width: 100,
+        scopedSlots: { customRender: 'onshelf_status' }
       },
       {
         title: '操作',
         key: 'action',
         value: 'action',
         fixed: 'right',
-        width: 100,
+        width: 200,
         scopedSlots: { customRender: 'action' }
       }
     ]
@@ -161,33 +186,58 @@ export default {
       columns,
       tableColumns: columns,
       showSticky: false,
-      stickyWidth: 0
+      stickyWidth: 0,
+      drugDrawerVisible: false,
+      isShowTaskOrderInfo: false
     }
   },
   components: {
-    columnSelect
+    columnSelect,
+    codeList,
+    packUpDetail,
+    drugInfoDetail
   },
   computed: {
     ...mapGetters({
-      pack_up_list: 'allot/pack_up_list'
+      packUpList: 'inhouse/packUpList',
+      isFetchPackUpList: 'inhouse/isFetchPackUpList'
     })
   },
   mounted () {
     this.tableList = this.$refs.tableRef.$el
     this.stickyWidth = this.tableList.clientWidth
     this.tableList.addEventListener('scroll', this.handleTableScroll, true)
-    // this.table = this.$refs.tableRef.$el
-    // this.stickyWidth = this.table.querySelector('.table-list').clientWidth
-    // this.table.addEventListener('scroll', this.handleTableScroll, true)
   },
   methods: {
-    goToAllot () {
-      this.$router.push({ name: 'pack_up_allot' })
+    ...mapActions({
+      fetchPackUpInfo: 'inhouse/fetchPackUpInfo'
+    }),
+    changePage (pagination) {
+      this.$emit('handlePageChange', pagination)
+    },
+    changePageSize (pagination) {
+      thsi.$emit('handlePageSizeChange', pagination)
+    },
+    goToAllot (drug) {
+      this.fetchPackUpInfo({ drug_in_detail_id: drug.drug_in_detail_id })
+      this.$router.push({ name: 'pack_up_allot', params: { drugName: drug.drug_name } })
+    },
+    showDrug () {
+      this.drugDrawerVisible = true
+      this.$refs.codeListRef.showDrugDrawer()
+    },
+    showTaskOrderInfo (drug_in_detail_id) {
+      this.fetchPackUpInfo({ drug_in_detail_id })
+      this.isShowTaskOrderInfo = true
+    },
+    closeTaskOrderInfo () {
+      this.isShowTaskOrderInfo = false
     },
     reloadList () {
+      this.$emit('resetPagination')
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
+    changeColumns (columns) {
+      this.tableColumns = columns
     },
     changeShowSticky (status) {
       this.showSticky = status
@@ -206,31 +256,12 @@ export default {
 
 <style lang="less" scoped>
 .pack-up-list {
-  margin: 10px 5px 0;
+  margin-top: 10px;
   padding: 10px;
   background-color: #fff;
   .toolRow {
     height: 60px;
     align-items: center;
-    .status-btn {
-      cursor: pointer;
-      margin-left: 10px;
-      span {
-        padding: 0 5px;
-      }
-      .bg-line {
-        margin-top: 5px;
-        height: 2px;
-      }
-    }
-    .active-btn {
-      span {
-        color: #1890ff;
-      }
-      .bg-line {
-        background-color: #1890ff;
-      }
-    }
     .toolsBtn {
       .ant-btn {
         margin-right: 10px;
@@ -242,47 +273,10 @@ export default {
   height: 32px;
   line-height: 32px;
 }
-.task-order-detail-drawer {
-  /deep/ .ant-drawer-body {
-    padding: 16px;
-  }
-}
-.drug-list-drawer {
-  .code-list {
-    height: 100%;
-    .infinite-drug-code {
-      // border: 1px solid #e8e8e8;
-      border-radius: 4px;
-      overflow: auto;
-      padding: 8px 24px;
-      height: calc(100vh - 55px);
-    }
-    .loading-container {
-      position: absolute;
-      bottom: 40px;
-      width: 100%;
-      text-align: center;
-    }
-  }
+.code-drawer {
   /deep/ .ant-drawer-body {
     padding: 0;
     height: calc(100% - 62px);
-  }
-  /deep/ .ant-list-item {
-    padding: 8px 16px;
-    border-bottom: 1px solid #e8e8e8 !important;
-  }
-}
-.confirm-form {
-  /deep/ .ant-input-number {
-    input {
-      color: red;
-      font-weight: 600;
-    }
-  }
-  /deep/ .ant-input {
-    color: red;
-    font-weight: 600;
   }
 }
 .sticky-table {

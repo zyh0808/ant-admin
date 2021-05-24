@@ -1,4 +1,4 @@
-# ant-admin
+# medicine-system
 
 ## Project setup
 

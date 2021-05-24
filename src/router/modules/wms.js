@@ -1,18 +1,18 @@
 // import main from "../../views/main.vue"
-// import wmsClient from "../../views/wms/wmsClient.vue"
-// import wmsClientDetail from "../../views/wms/wmsClientDetail.vue"
-// import wmsProjectDetail from "../../views/wms/wmsProjectDetail.vue"
-// import wmsDrug from "../../views/wms/wmsDrug.vue"
-// import wmsSite from "../../views/wms/wmsSite.vue"
-// import wmsHouse from "../../views/wms/wmsHouse.vue"
-// import wmsTempRange from "../../views/wms/wmsTempRange.vue"
-// import wmsShelfKind from "../../views/wms/wmsShelfKind.vue"
-// import wmsShelf from "../../views/wms/wmsShelf.vue"
-// import wmsCell from "../../views/wms/wmsCell.vue"
-// import wmsBoxKind from "../../views/wms/wmsBoxKind.vue"
-// import wmsBox from "../../views/wms/wmsBox.vue"
-// import wmsBoxKindDrug from "../../views/wms/wmsBoxKindDrug.vue"
-// import wmsCellBox from "../../views/wms/wmsCellBox.vue"
+// import client from "../../views/wms/client.vue"
+// import clientDetail from "../../views/wms/clientDetail.vue"
+// import projectDetail from "../../views/wms/projectDetail.vue"
+// import drug from "../../views/wms/drug.vue"
+// import site from "../../views/wms/site.vue"
+// import house from "../../views/wms/house.vue"
+// import tempRange from "../../views/wms/tempRange.vue"
+// import shelfKind from "../../views/wms/shelfKind.vue"
+// import shelf from "../../views/wms/shelf.vue"
+// import cell from "../../views/wms/cell.vue"
+// import boxKind from "../../views/wms/boxKind.vue"
+// import box from "../../views/wms/box.vue"
+// import boxKindDrug from "../../views/wms/boxKindDrug.vue"
+// import cellBox from "../../views/wms/cellBox.vue"
 
 const routes = [
   {
@@ -24,8 +24,8 @@ const routes = [
       {
         path: "wms_client",
         name: "wms_client",
-        // component: wmsClient,
-        component: resolve => require(['../../views/wms/wmsClient'], resolve),
+        // component: client,
+        component: resolve => require(['../../views/wms/client'], resolve),
         meta: {
           title: "申办方管理"
         }
@@ -33,8 +33,8 @@ const routes = [
       {
         path: "wms_client_detail/:id",
         name: "wms_client_detail",
-        // component: wmsClientDetail,
-        component: resolve => require(['../../views/wms/wmsClientDetail'], resolve),
+        // component: clientDetail,
+        component: resolve => require(['../../views/wms/clientDetail'], resolve),
         meta: {
           title: "申办方详情"
         }
@@ -42,8 +42,8 @@ const routes = [
       {
         path: "wms_project_detail/:id",
         name: "wms_project_detail",
-        // component: wmsProjectDetail,
-        component: resolve => require(['../../views/wms/wmsProjectDetail'], resolve),
+        // component: projectDetail,
+        component: resolve => require(['../../views/wms/projectDetail'], resolve),
         meta: {
           title: "申办方项目详情"
         }
@@ -51,8 +51,8 @@ const routes = [
       {
         path: "wms_drug",
         name: "wms_drug",
-        // component: wmsDrug,
-        component: resolve => require(['../../views/wms/wmsDrug'], resolve),
+        // component: drug,
+        component: resolve => require(['../../views/wms/drug'], resolve),
         meta: {
           title: "药品管理"
         }
@@ -60,8 +60,8 @@ const routes = [
       {
         path: "wms_site",
         name: "wms_site",
-        // component: wmsSite,
-        component: resolve => require(['../../views/wms/wmsSite'], resolve),
+        // component: site,
+        component: resolve => require(['../../views/wms/site'], resolve),
         meta: {
           title: "实验中心管理"
         }
@@ -69,8 +69,8 @@ const routes = [
       {
         path: "wms_house",
         name: "wms_house",
-        // component: wmsHouse,
-        component: resolve => require(['../../views/wms/wmsHouse'], resolve),
+        // component: house,
+        component: resolve => require(['../../views/wms/house'], resolve),
         meta: {
           title: "仓库管理"
         }
@@ -78,8 +78,8 @@ const routes = [
       {
         path: "wms_temprange",
         name: "wms_temprange",
-        // component: wmsTempRange,
-        component: resolve => require(['../../views/wms/wmsTempRange'], resolve),
+        // component: tempRange,
+        component: resolve => require(['../../views/wms/tempRange'], resolve),
         meta: {
           title: "温区管理"
         }
@@ -87,8 +87,8 @@ const routes = [
       {
         path: "wms_shelfkind",
         name: "wms_shelfkind",
-        // component: wmsShelfKind,
-        component: resolve => require(['../../views/wms/wmsShelfKind'], resolve),
+        // component: shelfKind,
+        component: resolve => require(['../../views/wms/shelfKind'], resolve),
         meta: {
           title: "货架种类"
         }
@@ -96,8 +96,8 @@ const routes = [
       {
         path: "wms_shelf",
         name: "wms_shelf",
-        // component: wmsShelf,
-        component: resolve => require(['../../views/wms/wmsShelf'], resolve),
+        // component: shelf,
+        component: resolve => require(['../../views/wms/shelf'], resolve),
         meta: {
           title: "货架管理"
         }
@@ -105,8 +105,8 @@ const routes = [
       {
         path: "wms_cell",
         name: "wms_cell",
-        // component: wmsCell,
-        component: resolve => require(['../../views/wms/wmsCell'], resolve),
+        // component: cell,
+        component: resolve => require(['../../views/wms/cell'], resolve),
         meta: {
           title: "货位管理"
         }
@@ -114,8 +114,8 @@ const routes = [
       {
         path: "wms_boxkind",
         name: "wms_boxkind",
-        // component: wmsBoxKind,
-        component: resolve => require(['../../views/wms/wmsBoxKind'], resolve),
+        // component: boxKind,
+        component: resolve => require(['../../views/wms/boxKind'], resolve),
         meta: {
           title: "箱型管理"
         }
@@ -123,8 +123,8 @@ const routes = [
       {
         path: "wms_box",
         name: "wms_box",
-        // component: wmsBox,
-        component: resolve => require(['../../views/wms/wmsBox'], resolve),
+        // component: box,
+        component: resolve => require(['../../views/wms/box'], resolve),
         meta: {
           title: "药品箱管理"
         }
@@ -132,8 +132,8 @@ const routes = [
       {
         path: "wms_boxkinddrug",
         name: "wms_boxkinddrug",
-        // component: wmsBoxKindDrug,
-        component: resolve => require(['../../views/wms/wmsBoxKindDrug'], resolve),
+        // component: boxKindDrug,
+        component: resolve => require(['../../views/wms/boxKindDrug'], resolve),
         meta: {
           title: "箱型药品配置"
         }
@@ -141,10 +141,42 @@ const routes = [
       {
         path: "wms_cellbox",
         name: "wms_cellbox",
-        // component: wmsCellBox,
-        component: resolve => require(['../../views/wms/wmsCellBox'], resolve),
+        // component: cellBox,
+        component: resolve => require(['../../views/wms/cellBox'], resolve),
         meta: {
           title: "货位药品箱"
+        }
+      },
+      {
+        path: "wms_inkscreen",
+        name: "wms_inkscreen",
+        component: resolve => require(['../../views/wms/inkscreen'], resolve),
+        meta: {
+          title: "墨水屏管理"
+        }
+      },
+      {
+        path: "wms_inkscreen_code_log",
+        name: "wms_inkscreen_code_log",
+        component: resolve => require(['../../views/wms/inkscreenCodeLog'], resolve),
+        meta: {
+          title: "墨水屏条码日志"
+        }
+      },
+      {
+        path: "box_inkscreen_log",
+        name: "box_inkscreen_log",
+        component: resolve => require(['../../views/wms/boxInkscreenLog'], resolve),
+        meta: {
+          title: "箱子墨水屏日志"
+        }
+      },
+      {
+        path: "box_open_log",
+        name: "box_open_log",
+        component: resolve => require(['../../views/wms/boxOpenLog'], resolve),
+        meta: {
+          title: "药品箱开锁日志"
         }
       }
     ]

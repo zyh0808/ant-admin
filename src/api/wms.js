@@ -2,7 +2,7 @@ import { service } from '@/js/request'
 
 // let API = 'http://192.168.0.103:16800'
 let API = ''
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "test") {
   API = 'http://123.57.86.56:16800'
 }
 
@@ -134,6 +134,7 @@ export function getDrugList (data) {
   })
 }
 
+//http://192.168.0.101:16800
 export function addDrug (data) {
   return service({
     url: API + '/api/wms/druginfo/add',
@@ -606,7 +607,7 @@ export function getShelfRowList (data) {
   })
 }
 
-export function getCellList (data) {
+export function getRowCellList (data) {
   return service({
     url: API + '/api/wms/shelf_cell/cells',
     method: 'post',
@@ -649,6 +650,70 @@ export function deleteCellBox (data) {
 export function getBoxList (data) {
   return service({
     url: API + '/api/wms/box_info/list',
+    method: 'post',
+    data
+  })
+}
+
+export function getInkscreenPageList (data) {
+  return service({
+    url: API + '/api/wms/inkscreen/pagelist',
+    method: 'post',
+    data
+  })
+}
+
+export function addInkscreen (data) {
+  return service({
+    url: API + '/api/wms/inkscreen/add',
+    method: 'post',
+    data
+  })
+}
+
+export function editInkscreen (data) {
+  return service({
+    url: API + '/api/wms/inkscreen/update',
+    method: 'post',
+    data
+  })
+}
+
+export function deleteInkscreen (data) {
+  return service({
+    url: API + '/api/wms/inkscreen/delete',
+    method: 'post',
+    data
+  })
+}
+
+export function getInkscreenCodeLogPageList (data) {
+  return service({
+    url: API + '/api/wms/inkscreen_log/pagelist',
+    method: 'post',
+    data
+  })
+}
+
+export function getBoxInkscreenLogPageList (data) {
+  return service({
+    url: API + '/api/wms/box_inkscreen_log/pagelist',
+    method: 'post',
+    data
+  })
+}
+
+export function getBoxOpenLogPageList (data) {
+  return service({
+    url: API + '/api/wms/box_open_log/pagelist',
+    method: 'post',
+    data
+  })
+}
+
+export function getCellList (data) {
+  return service({
+    url: API + '/api/wms/shelf_cell/list',
     method: 'post',
     data
   })

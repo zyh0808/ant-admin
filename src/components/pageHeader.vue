@@ -2,8 +2,7 @@
   <div style="backgroundColor:#fff">
     <a-breadcrumb :routes="routes">
       <template slot="itemRender" slot-scope="{ route,routes }">
-        <span
-          v-if="route.path.length === 0 || routes.indexOf(route) === routes.length - 1">
+        <span v-if="route.path.length === 0 || routes.indexOf(route) === routes.length - 1">
           {{ route.breadcrumbName }}
         </span>
         <router-link v-else :to="{ path: `/${basePath}/${route.path}` }">
@@ -24,12 +23,20 @@ export default {
     basePath: {
       type: String,
       default: ''
+    },
+    headerTitle: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     title () {
-      const len = this.routes ? this.routes.length : 0
-      return len > 0 ? this.routes[len - 1].breadcrumbName : ''
+      if (this.headerTitle) {
+        return this.headerTitle
+      } else {
+        const len = this.routes ? this.routes.length : 0
+        return len > 0 ? this.routes[len - 1].breadcrumbName : ''
+      }
     }
   }
 }

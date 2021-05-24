@@ -2,7 +2,7 @@
   <div>
     <div class="project-search">
       <a-form-model layout="inline" :model="searchForm" ref="searchFormRef"
-        class="search-form" :label-col="{ span: 10 }"
+        class="search-form" :label-col="{ span: 6 }"
         :wrapper-col="{ span: 14 }">
         <a-row class="searchRow">
           <a-col :span="6">
@@ -18,7 +18,7 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="6">
-            <a-form-model-item label="付费账号">
+            <a-form-model-item label="付费账号名称">
               <a-select v-model="searchForm.paid_account_id" placeholder="请选择">
                 <a-select-option v-for="item in payAccountList"
                   :key="item.paid_account_id" :value="item.paid_account_id">
@@ -62,14 +62,14 @@
                 <span>设置</span>
               </template>
               <columnSelect :plainOptions="columns"
-                @changeColumns="changeColumns(arguments)"></columnSelect>
+                @changeColumns="changeColumns"></columnSelect>
             </a-tooltip>
           </a-space>
         </a-row>
       </a-row>
       <a-table :columns="tableColumns" :data-source="projectList"
         class="table-one" :rowKey="record => record.proj_id"
-        :loading="isfetchProjectList" :pagination="false" :scroll="{x:1600}">
+        :loading="isfetchProjectList" :pagination="false">
         <span slot="validate" slot-scope="validate">
           <a-switch :checked="validate" disabled />
         </span>
@@ -118,7 +118,7 @@
         </a-row>
         <a-row>
           <a-col :span="12">
-            <a-form-model-item label="付费账号" prop="paid_account_id">
+            <a-form-model-item label="付费账号名称" prop="paid_account_id">
               <a-select v-model="projectForm.paid_account_id" placeholder="请选择">
                 <a-select-option v-for="item in payAccountList"
                   :key="item.paid_account_id" :value="item.paid_account_id">
@@ -239,13 +239,6 @@ export default {
         title: '付费账号名称',
         dataIndex: 'paid_name',
         value: 'paid_name',
-        width: 150,
-        ellipsis: true
-      },
-      {
-        title: '付费账号',
-        dataIndex: 'paid_account_id',
-        value: 'paid_account_id',
         width: 150,
         ellipsis: true
       },
@@ -380,7 +373,7 @@ export default {
       const params = Object.assign(this.projectForm,
         {
           is_disabled: this.projectForm.validate ? 0 : 1,
-          oper_type: parseInt(this.clientForm.oper_type)
+          oper_type: parseInt(this.projectForm.oper_type)
         }
       )
       addProject(params).then(res => {
@@ -396,7 +389,7 @@ export default {
       const params = Object.assign(this.projectForm,
         {
           is_disabled: this.projectForm.validate ? 0 : 1,
-          oper_type: parseInt(this.clientForm.oper_type)
+          oper_type: parseInt(this.projectForm.oper_type)
         }
       )
       editProject(params).then(res => {
@@ -431,9 +424,9 @@ export default {
     reloadList () {
       this.getProjectList()
     },
-    changeColumns (e) {
-      this.tableColumns = e[0]
-    }
+    changeColumns (columns) {
+      this.tableColumns = columns
+    },
   }
 }
 </script>

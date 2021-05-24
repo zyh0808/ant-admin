@@ -1,16 +1,16 @@
 // import main from "../../views/main.vue"
-// import employeeSys from "../../views/employee/employeeSys.vue"
-// import employeeCompany from "../../views/employee/employeeCompany.vue"
-// import employeeOrg from "../../views/employee/employeeOrg.vue"
-// import employeeRole from "../../views/employee/employeeRole.vue"
-// import employeeModule from "../../views/employee/employeeModule.vue"
-// import employeeEmp from "../../views/employee/employeeEmp.vue"
-// import employeeUser from "../../views/employee/employeeUser.vue"
-// import employeeAuth from "../../views/employee/employeeAuth.vue"
-// import employeeArea from "../../views/employee/employeeArea.vue"
-// import employeeDict from "../../views/employee/employeeDict.vue"
-// import employeeSeed from "../../views/employee/employeeSeed.vue"
-// import employeeLog from "../../views/employee/employeeLog.vue"
+// import system from "../../views/employee/system.vue"
+// import company from "../../views/employee/company.vue"
+// import organization from "../../views/employee/organization.vue"
+// import systemRole from "../../views/employee/systemRole.vue"
+// import systemModule from "../../views/employee/systemModule.vue"
+// import employee from "../../views/employee/employee.vue"
+// import user from "../../views/employee/user.vue"
+// import authority from "../../views/employee/authority.vue"
+// import area from "../../views/employee/area.vue"
+// import dictionary from "../../views/employee/dictionary.vue"
+// import seed from "../../views/employee/seed.vue"
+// import systemLog from "../../views/employee/systemLog.vue"
 
 const routes = [
   {
@@ -22,8 +22,8 @@ const routes = [
       {
         path: "employee_sys",
         name: "employee_sys",
-        // component: employeeSys,
-        component: resolve => require(['../../views/employee/employeeSys'], resolve),
+        // component: system,
+        component: resolve => require(['../../views/employee/system'], resolve),
         meta: {
           title: "系统管理"
         }
@@ -31,8 +31,8 @@ const routes = [
       {
         path: "employee_company",
         name: "employee_company",
-        // component: employeeCompany,
-        component: resolve => require(['../../views/employee/employeeCompany'], resolve),
+        // component: company,
+        component: resolve => require(['../../views/employee/company'], resolve),
         meta: {
           title: "公司信息"
         }
@@ -40,8 +40,8 @@ const routes = [
       {
         path: "employee_org",
         name: "employee_org",
-        // component: employeeOrg,
-        component: resolve => require(['../../views/employee/employeeOrg'], resolve),
+        // component: organization,
+        component: resolve => require(['../../views/employee/organization'], resolve),
         meta: {
           title: "组织机构"
         }
@@ -49,8 +49,8 @@ const routes = [
       {
         path: "employee_role",
         name: "employee_role",
-        // component: employeeRole,
-        component: resolve => require(['../../views/employee/employeeRole'], resolve),
+        // component: systemRole,
+        component: resolve => require(['../../views/employee/systemRole'], resolve),
         meta: {
           title: "角色管理"
         }
@@ -58,8 +58,8 @@ const routes = [
       {
         path: "employee_module",
         name: "employee_module",
-        // component: employeeModule,
-        component: resolve => require(['../../views/employee/employeeModule'], resolve),
+        // component: systemModule,
+        component: resolve => require(['../../views/employee/systemModule'], resolve),
         meta: {
           title: "模块管理"
         }
@@ -67,8 +67,8 @@ const routes = [
       {
         path: "employee_emp",
         name: "employee_emp",
-        // component: employeeEmp,
-        component: resolve => require(['../../views/employee/employeeEmp'], resolve),
+        // component: employee,
+        component: resolve => require(['../../views/employee/employee'], resolve),
         meta: {
           title: "员工管理"
         }
@@ -76,8 +76,8 @@ const routes = [
       {
         path: "employee_user",
         name: "employee_user",
-        // component: employeeUser,
-        component: resolve => require(['../../views/employee/employeeUser'], resolve),
+        // component: user,
+        component: resolve => require(['../../views/employee/user'], resolve),
         meta: {
           title: "用户管理"
         }
@@ -85,8 +85,8 @@ const routes = [
       {
         path: "employee_auth",
         name: "employee_auth",
-        // component: employeeAuth,
-        component: resolve => require(['../../views/employee/employeeAuth'], resolve),
+        // component: authority,
+        component: resolve => require(['../../views/employee/authority'], resolve),
         meta: {
           title: "权限管理"
         }
@@ -94,8 +94,8 @@ const routes = [
       {
         path: "employee_area",
         name: "employee_area",
-        // component: employeeArea,
-        component: resolve => require(['../../views/employee/employeeArea'], resolve),
+        // component: area,
+        component: resolve => require(['../../views/employee/area'], resolve),
         meta: {
           title: "行政区域"
         }
@@ -103,8 +103,8 @@ const routes = [
       {
         path: "employee_dict",
         name: "employee_dict",
-        // component: employeeDict,
-        component: resolve => require(['../../views/employee/employeeDict'], resolve),
+        // component: dictionary,
+        component: resolve => require(['../../views/employee/dictionary'], resolve),
         meta: {
           title: "字典信息"
         }
@@ -112,8 +112,8 @@ const routes = [
       {
         path: "employee_seed",
         name: "employee_seed",
-        // component: employeeSeed,
-        component: resolve => require(['../../views/employee/employeeSys'], resolve),
+        // component: seed,
+        component: resolve => require(['../../views/employee/system'], resolve),
         meta: {
           title: "编号种子"
         }
@@ -121,8 +121,8 @@ const routes = [
       {
         path: "employee_log",
         name: "employee_log",
-        // component: employeeLog,
-        component: resolve => require(['../../views/employee/employeeLog'], resolve),
+        // component: systemLog,
+        component: resolve => require(['../../views/employee/systemLog'], resolve),
         meta: {
           title: "系统日志"
         }

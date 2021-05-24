@@ -18,7 +18,7 @@ export default function createLogger ({
   return store => {
     let prevState = deepCopy(store.state)
 
-    if (typeof logger === 'undefined') {
+    if (typeof logger === 'null') {
       return
     }
 
